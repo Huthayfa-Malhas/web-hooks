@@ -11,19 +11,21 @@
 |
 */
 
-Route::get('/', function()
+Route::get('testingview', function()
 {
 
 	return View::make('session');
 });
+
+
+
 Route::get('d','\App\Controllers\SessionController@create');
 
 	// here is where the events fire
-	Event::fire('user.login');
-	Event::fire('user.newsletter');
-	Event::fire('user.logout');
-});//
-
+//	Event::fire('user.login');
+//	Event::fire('user.newsletter');
+//	Event::fire('user.logout');
+//});
 	Route::resource('sub', 'SubscriptionController');
 
 Route::get('test',function(){
@@ -38,6 +40,8 @@ Route::get('test',function(){
 	 return "done";
 });
 
+
+
 // Confide routes
 Route::get('users/create', 'UsersController@create');
 Route::post('users', 'UsersController@store');
@@ -49,4 +53,3 @@ Route::post('users/forgot_password', 'UsersController@doForgotPassword');
 Route::get('users/reset_password/{token}', 'UsersController@resetPassword');
 Route::post('users/reset_password', 'UsersController@doResetPassword');
 Route::get('users/logout', 'UsersController@logout');
-
