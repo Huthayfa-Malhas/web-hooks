@@ -66,7 +66,12 @@ App::down(function()
 {
 	return Response::make("Be right back!", 503);
 });
-
+/*
+|--------------------------------------------------------------------------
+| Register Subscriptions
+|--------------------------------------------------------------------------
+*/
+Event::subscribe('laratutHandlers\UserEventHandler');
 /*
 |--------------------------------------------------------------------------
 | Require The Filters File
