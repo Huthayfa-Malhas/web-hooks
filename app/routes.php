@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('testingview', function()
+Route::get('/', function()
 {
 
 	return View::make('session');

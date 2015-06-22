@@ -47,24 +47,7 @@ class SubscriptionController extends \BaseController {
 	 */
 	public function store()
 	{
-		$webhooks = new Webhooks;
-
-        $webhooks->user_id  = 1;
-        $webhooks->event = 'event.test';
-
-        // The password confirmation will be removed from model
-        // before saving. This field will be used in Ardent's
-        // auto validation.
-        $webhooks->url = 'www.test.com';
-
-        // Generate a random confirmation code
-        $webhooks->active = 1;
-     
-        // Save if valid. Password field will be hashed before save
-        $webhooks->save();;
-
-        return $webhooks;
-    }
+		
 
 
 	/**
@@ -111,7 +94,7 @@ class SubscriptionController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		return "Unsubscribe";
 	}
 
 
