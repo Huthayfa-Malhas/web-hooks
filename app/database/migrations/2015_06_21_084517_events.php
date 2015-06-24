@@ -2,7 +2,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class events extends Migration {
+class Events extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -17,9 +17,10 @@ class events extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
+            $table->boolean('active')->default(true);
 			$table->timestamps();
 		});
-		Schema::create('webhooks',function(Blueprint $table){
+		Schema::create('event_user',function(Blueprint $table){
 			$table->increments('id');
 			
 			$table->integer('event_id')->unsigned();
@@ -28,8 +29,8 @@ class events extends Migration {
 			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')->references('id')->on('users');
 
-			$table->integer('link_id')->unsigned();
-			$table->foreign('link_id')->references('id')->on('links');
+			$table->integer('url_id')->unsigned();
+			$table->foreign('url_id')->references('id')->on('urls');
 			
 			$table->timestamps();
 		});
@@ -43,7 +44,7 @@ class events extends Migration {
 	public function down()
 	{
 		Schema::drop('events');
-		Schema::drop('webhooks');
+		Schema::drop('event_user');
 	}
 
 }

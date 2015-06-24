@@ -2,7 +2,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Links extends Migration {
+class Urls extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,10 +13,10 @@ class Links extends Migration {
 
 	public function up()
 	{
-		Schema::create('links', function(Blueprint $table)
+		Schema::create('urls', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->string('link');
+            $table->string('callback_url');
             $table->timestamps();
 		});
 	}
@@ -28,7 +28,7 @@ class Links extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('links');
+		Schema::drop('urls');
 	}
 
 }

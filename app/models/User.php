@@ -6,16 +6,15 @@ use Zizaco\Confide\ConfideUserInterface;
 class User extends \Eloquent implements ConfideUserInterface
 {
 	protected $table = 'users';
+	protected $fillable = ["username","email","password","confirmation_code","remember_token","confirmed"];
 
-	public function links(){
-		return $this->belongsToMany('Link', 'webhooks', 'user_id', 'link_id')->withTimestamps();
-
+	public function urls(){
+		return $this->belongsToMany('\Webhooks\Models\Url', 'webhooks', 'user_id', 'link_id')->withTimestamps();
 	}
 
 	public function events(){		
 		return $this->belongsToMany('Webhooks\Models\Event', 'webhooks', 'user_id', 'event_id')->withTimestamps();
 	}
-
 
     use ConfideUser;
 
