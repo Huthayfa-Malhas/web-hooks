@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class Urls extends Migration {
@@ -9,11 +8,10 @@ class Urls extends Migration {
 	 *
 	 * @return void
 	 */
-	
 
 	public function up()
 	{
-		Schema::create('urls', function(Blueprint $table)
+		Schema::create('urls', function($table)
 		{
 			$table->increments('id');
             $table->string('callback_url');

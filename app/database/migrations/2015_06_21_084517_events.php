@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class Events extends Migration {
@@ -13,14 +12,15 @@ class Events extends Migration {
 
 	public function up()
 	{
-		Schema::create('events', function(Blueprint $table)
+		Schema::create('events', function($table)
 		{
 			$table->increments('id');
 			$table->string('name');
             $table->boolean('active')->default(true);
 			$table->timestamps();
 		});
-		Schema::create('event_user',function(Blueprint $table){
+
+		Schema::create('event_user',function($table){
 			$table->increments('id');
 			
 			$table->integer('event_id')->unsigned();
