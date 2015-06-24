@@ -1,4 +1,5 @@
-<?php namespace laratutHandlers;
+<?php
+ namespace laratutHandlers;
 
 class UserEventHandler {
 

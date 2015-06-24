@@ -1,19 +1,17 @@
 <?php 
 
-namespace App\Http\Controllers;
-use App\Controllers\Controller;
-use App\Requests;
+class SessionController extends  \BaseController
+{
 
-class Sessioncontroller extends  Controller {
+public function index(){
+	return \View::make('session');
+}
 
-
-public function destroy()
+public function login()
 {
 	
 	return \View::make('login');
 }
-
-
 
 public function create(){
 	

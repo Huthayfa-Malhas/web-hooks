@@ -1,46 +1,21 @@
 <?php
-
+use Webhooks\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
-|
 | Here is where you can register all of the routes for an application.
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the Closure to execute when that URI is requested.
 |
 */
 
-Route::get('testingview', function()
+Route::get('/', function()
 {
-
-	return View::make('session');
+    return View::make('session');
 });
 
-
-
-Route::get('d','\App\Controllers\SessionController@create');
-
-	// here is where the events fire
-//	Event::fire('user.login');
-//	Event::fire('user.newsletter');
-//	Event::fire('user.logout');
-//});
-	Route::resource('sub', 'SubscriptionController');
-
-Route::get('test',function(){
-	
-	 // \EventT::create(['name'=>'event1']);
-	 // \Url::create(['url'=>'test.com']);
-
-	//User::find(2)->cases()->attach(10);
-	Cases::find(3)->links()->attach(9,['user_id'=>7]);
-	Link::find(1)->cases()->attach(1);
-
-	 return "done";
-});
-
-
+Route::get('subscribe', 'SubscriptionController@store');
 
 // Confide routes
 Route::get('users/create', 'UsersController@create');

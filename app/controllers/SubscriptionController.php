@@ -1,6 +1,7 @@
 <?php
 
-class SubscriptionController extends \BaseController {
+class SubscriptionController extends \BaseController
+{
 
 	/**
 	 * Display a listing of the resource.
@@ -9,23 +10,7 @@ class SubscriptionController extends \BaseController {
 	 */
 	public function index()
 	{
-		$webhooks = new Webhooks;
-
-        $webhooks->user_id  = 1;
-        $webhooks->event = 'event.test';
-
-        // The password confirmation will be removed from model
-        // before saving. This field will be used in Ardent's
-        // auto validation.
-        $webhooks->url = 'www.test.com';
-
-        // Generate a random confirmation code
-        $webhooks->active = 1;
-     
-        // Save if valid. Password field will be hashed before save
-        $webhooks->save();;
-
-        return $webhooks;
+		
 	}
 
 
@@ -47,23 +32,24 @@ class SubscriptionController extends \BaseController {
 	 */
 	public function store()
 	{
-		$webhooks = new Webhooks;
 
+	//	\Cases::create(['name'=>'Event1']);
+		\Link::create(['link' => 'test.net']);
+		return "asd";
+	/*
+		$webhooks = new Webhooks;
         $webhooks->user_id  = 1;
         $webhooks->event = 'event.test';
-
         // The password confirmation will be removed from model
         // before saving. This field will be used in Ardent's
         // auto validation.
         $webhooks->url = 'www.test.com';
-
         // Generate a random confirmation code
         $webhooks->active = 1;
-     
         // Save if valid. Password field will be hashed before save
         $webhooks->save();;
-
         return $webhooks;
+        */
     }
 
 
@@ -75,7 +61,7 @@ class SubscriptionController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		return "Show";
 	}
 
 

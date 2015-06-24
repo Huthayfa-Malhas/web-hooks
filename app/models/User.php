@@ -1,18 +1,19 @@
-<?php
+<?php namespace Webhooks\Models;
 use Zizaco\Confide\ConfideUser;
 use Zizaco\Confide\ConfideUserInterface;
 
-class User extends Eloquent implements ConfideUserInterface
+
+class User extends \Eloquent implements ConfideUserInterface
 {
 	protected $table = 'users';
 
 	public function links(){
-		return $this->belongsToMany('Link', 'case_user', 'user_id', 'link_id')->withTimestamps();
+		return $this->belongsToMany('Link', 'webhooks', 'user_id', 'link_id')->withTimestamps();
 
 	}
 
-	public function cases(){		
-		return $this->belongsToMany('Cases', 'case_user', 'user_id', 'case_id')->withTimestamps();
+	public function events(){		
+		return $this->belongsToMany('Webhooks\Models\Event', 'webhooks', 'user_id', 'event_id')->withTimestamps();
 	}
 
 

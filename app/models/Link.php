@@ -1,16 +1,17 @@
-<?php 
-class Link extends Eloquent {
+<?php namespace Webhooks\Models;
+
+class Link extends \Eloquent {
 	
 	protected $table = 'links';
-	protected $fillable = ['url'];
+	protected $fillable = ['link'];
 
 	public function users(){
-		return $this->belongsToMany('User', 'case_user', 'link_id', 'user_id')->withTimestamps();
+		return $this->belongsToMany('User', 'webhooks', 'link_id', 'user_id')->withTimestamps();
 
 	}
 
-	public function cases(){
-		return $this->belongsToMany('Cases', 'case_user', 'link_id', 'case_id')->withTimestamps();
+	public function events(){
+		return $this->belongsToMany('\Webhooks\Models\Event', 'webhooks', 'link_id', 'event_id')->withTimestamps();
 	}
 
 }
