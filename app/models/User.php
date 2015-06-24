@@ -1,20 +1,29 @@
-<?php
+<?php namespace Webhooks\Models;
+use Zizaco\Confide\ConfideUser;
+use Zizaco\Confide\ConfideUserInterface;
 
-use Illuminate\Auth\UserTrait;
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableTrait;
-use Illuminate\Auth\Reminders\RemindableInterface;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+class User extends \Eloquent implements ConfideUserInterface
+{
+	protected $table = 'users';
 
-	use UserTrait, RemindableTrait;
+	public function links(){
+		return $this->belongsToMany('Link', 'webhooks', 'user_id', 'link_id')->withTimestamps();
+
+	}
+
+	public function events(){		
+		return $this->belongsToMany('Webhooks\Models\Event', 'webhooks', 'user_id', 'event_id')->withTimestamps();
+	}
+
+
+    use ConfideUser;
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'users';
 
 	/**
 	 * The attributes excluded from the model's JSON form.
