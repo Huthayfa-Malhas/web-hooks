@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -10,8 +9,7 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
-Route::get('/', function()
+Route::get('/k', function()
 {
 	
 	return View::make('session');
@@ -28,17 +26,6 @@ Route::get('d','\App\Controllers\SessionController@create');
 //});
 	Route::resource('sub', 'SubscriptionController');
 
-Route::get('test',function(){
-	
-	 // \EventT::create(['name'=>'event1']);
-	 // \Url::create(['url'=>'test.com']);
-
-	//User::find(2)->cases()->attach(10);
-	Cases::find(3)->links()->attach(9,['user_id'=>7]);
-	Link::find(1)->cases()->attach(1);
-
-	 return "done";
-});
 
 
 

@@ -124,6 +124,10 @@
         <option value="1">Option #1</option>
         <option value="2">Option #2</option>
         <option value="3">Option #3</option>
+        <option value="3">Option #3</option>
+        <option value="3">Option #3</option>
+        <option value="3">Option #3</option>
+       
       </select>
     </div>
     
@@ -186,21 +190,23 @@ var $template = $(".template");
 
 var hash =0;
 var ev = "event"
+
 $(".btn-add-panel").on("click", function () {
- // <?php foreach ($sentnames as $sent ){ ?>
-for (var i = 0; i < $sentnames.length; i++) {
+ //{{$options}}
+ //echo ({{$sentnames}});
+for (var i = 0; i < {{$sentnames}}.length; i++) {
   
 
 
    var $newPanel = $template.clone();
     $newPanel.find(".collapse").removeClass("in");
     $newPanel.find(".accordion-toggle").attr("href",  "#" + (++hash))
-             .text('<?=$sentnames[i]?>');
+             .text({{$sentnames[$i]}});
     $newPanel.find(".panel-collapse").attr("id", hash).addClass("collapse").removeClass("in").text("co");
     $("#accordion").append($newPanel.fadeIn());
-//<?php  }?>
 
-    };
+
+  };
  });
 
 </script>

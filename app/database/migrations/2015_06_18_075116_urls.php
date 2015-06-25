@@ -1,28 +1,22 @@
 <?php
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Links extends Migration {
+class Urls extends Migration {
 
 	/**
 	 * Run the migrations.
 	 *
 	 * @return void
 	 */
-	
 
 	public function up()
 	{
-		Schema::create('links', function(Blueprint $table)
+		Schema::create('urls', function($table)
 		{
 			$table->increments('id');
-			$table->string('name');
-            $table->boolean('active')->default(true);
-			$table->timestamps();
+            $table->string('callback_url');
+            $table->timestamps();
 		});
-		
-
-
 	}
 
 	/**
@@ -32,7 +26,7 @@ class Links extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('links');
+		Schema::drop('urls');
 	}
 
 }

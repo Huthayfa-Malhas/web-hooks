@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Database\Query\Builder;
+
 class SubscriptionController extends \BaseController {
 
 	/**
@@ -44,13 +45,16 @@ class SubscriptionController extends \BaseController {
 	{
 			$i=0;
 			$sentnames = array();
-			$eventss= User::find($id)->cases->toArray();
+			$eventss = Webhooks\Models\User::find($id)->events->toArray();
 			//$eventss= User::find($id)->cases;
+			//dd($eventss );
 			$numofevents=count($eventss);
 			
-			$eventurls = Case1::find($eventss[0]["id"])->links->toArray();
+			$eventurls = \Webhooks\Models\Event::find($eventss[0]["id"])->urls->toArray();
 
-  //dd($user->cases()->get());
+
+
+  //dd($eventurls);
 		
 
 //[{"id":5},{},{}]
@@ -81,8 +85,8 @@ for ($i=0; $i <$numofevents ; $i++) {
 		}
 */
 //return $sentnames;
-return View::make('session',['sentnames'=>$sentnames]);
-
+//return View::make('session');
+ return View::make('session')->with($sentnames);
 }
 	/**
 	 * Show the form for editing the specified resource.
@@ -120,7 +124,7 @@ return View::make('session',['sentnames'=>$sentnames]);
 
 		$user= User::find(2);
 		
-		$event = Case1::find($id);
+		$event = \Webhooks\Models\Url::find($id);
 
 	//DB::select('select `link_id` from case_user where `case_id` = 3 and `user_id` = 2')->delete();
 		//dd($linkid);
@@ -129,7 +133,7 @@ return View::make('session',['sentnames'=>$sentnames]);
 		//{
 		$linkid= $event->links()->link_id;
 		//}
-		$link_id = Link::find($linkid);
+		$link_id = \Webhooks\Models\Url::find($linkid);
 
 	    $user->cases()->detach($event);
 		$link_id->delete();
