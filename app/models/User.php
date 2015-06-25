@@ -1,28 +1,20 @@
 <?php
-use Zizaco\Confide\ConfideUser;
-use Zizaco\Confide\ConfideUserInterface;
 
-class User extends Eloquent implements ConfideUserInterface
-{
-	protected $table = 'users';
+use Illuminate\Auth\UserTrait;
+use Illuminate\Auth\UserInterface;
+use Illuminate\Auth\Reminders\RemindableTrait;
+use Illuminate\Auth\Reminders\RemindableInterface;
 
-	public function links(){
-		return $this->belongsToMany('Link', 'case_user', 'user_id', 'link_id')->withTimestamps();
+class User extends Eloquent implements UserInterface, RemindableInterface {
 
-	}
-
-	public function cases(){		
-		return $this->belongsToMany('Case1', 'case_user', 'user_id', 'case_id')->withTimestamps();
-	}
-
-
-    use ConfideUser;
+	use UserTrait, RemindableTrait;
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
+	protected $table = 'users';
 
 	/**
 	 * The attributes excluded from the model's JSON form.
