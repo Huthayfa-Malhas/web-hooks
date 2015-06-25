@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en-US">
-<link rel="stylesheet" type="text/css" media="all" href="mystyle.css">
- <link rel="stylesheet" type="text/js" media="all" href="myscript.js">
+<link rel="stylesheet" type="text/css" media="all" href="/mystyle.css">
+
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -34,6 +34,8 @@
           </ul>
         </div>
         
+
+        
         <div id="firstpage">
           <div id="ref1" class="pageitem displayed">
             <h3> New to WebHook !!</h3>
@@ -41,41 +43,30 @@
            
           <p>Yamsafer.me ("The Traveller" in Arabic) is a rapidly-growing hotel booking site. We enable Arabs to easily find and book hotels, with or without a credit card.</p>
             
+         
             <p> Yamsafer Webhooks allow you to build or set up integrations which subscribe to certain events on GitHub.com. When one of those events is triggered, we’ll send a HTTP POST payload to the webhook’s configured URL. Webhooks can be used to update an external issue tracker, trigger CI builds, update a backup mirror, or even deploy to your production server.</p>
-        
+       
+
+
+
+
           </div><!-- @end #job1 -->
 <!-- @end #job1 -->
 
           <div id="ref2" class="pageitem">
-         <p1>Event name and details</p1>    
+          
 <div class="panel-group" id="accordion">
   <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-          Genral View
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in">
-      <div class="panel-body">
-        You can here change the data and edit the event name 
-      </div>
-    </div>
+    
+    
   </div>
   <div class="panel panel-default template">
-  <div class="onoffswitch">
-    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-    <label class="onoffswitch-label" for="myonoffswitch">
-        <span class="onoffswitch-inner"></span>
-        <span class="onoffswitch-switch"></span>
-    </label>
-</div>
+  
     <div class="panel-heading">
       <h4 class="panel-title">
 
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-          Your First Event
+          Edit Your Event
         </a>
       </h4>
     </div>
@@ -87,6 +78,8 @@
   </div>
 </div>
 <br />
+
+
 <button class="btn btn-lg btn-primary btn-add-panel">
     <i class="glyphicon glyphicon-plus"></i> Add new panel
 </button>
@@ -150,7 +143,7 @@
           
             
            
-          </div>     <!-- @end #job4 -->
+          </div>     <!-- @end #page4 -->
           
        
         </div>
@@ -186,19 +179,7 @@ function testResults (form) {
 
 
 </script>
-<script >
-$(document).ready(function(){
-  $("#demo").on("hide.bs.collapse", function(){
-    $(".btn").html('<span class="glyphicon glyphicon-collapse-down"></span> Open');
-  });
-  $("#demo").on("show.bs.collapse", function(){
-    $(".btn").html('<span class="glyphicon glyphicon-collapse-up"></span> Close');
-  });
-});
 
-
-
-</script>
 <script>
 
 var $template = $(".template");
@@ -206,13 +187,21 @@ var $template = $(".template");
 var hash =0;
 var ev = "event"
 $(".btn-add-panel").on("click", function () {
-    var $newPanel = $template.clone();
+ // <?php foreach ($sentnames as $sent ){ ?>
+for (var i = 0; i < $sentnames.length; i++) {
+  
+
+
+   var $newPanel = $template.clone();
     $newPanel.find(".collapse").removeClass("in");
     $newPanel.find(".accordion-toggle").attr("href",  "#" + (++hash))
-             .text(ev);
-    $newPanel.find(".panel-collapse").attr("id", hash).addClass("collapse").removeClass("in").text("ddssssss");
+             .text('<?=$sentnames[i]?>');
+    $newPanel.find(".panel-collapse").attr("id", hash).addClass("collapse").removeClass("in").text("co");
     $("#accordion").append($newPanel.fadeIn());
-});
+//<?php  }?>
+
+    };
+ });
 
 </script>
 

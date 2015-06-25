@@ -19,11 +19,16 @@ class Cases extends Migration {
 			$table->string('name');
 			$table->timestamps();
 		});
+		
 		Schema::create('case_user',function(Blueprint $table){
 			$table->increments('id');
-			$table->integer('case_id');
-			$table->integer('user_id');
-			$table->integer('link_id');
+			
+			$table->integer('case_id')->unsigned();
+			$table->foreign('case_id')->references('id')->on('cases')->onDelete('cascade');
+			$table->integer('user_id')->unsigned();
+			$table->foreign('user_id')->references('id')->on('users');
+			$table->integer('link_id')->unsigned();
+			$table->foreign('link_id')->references('id')->on('links')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

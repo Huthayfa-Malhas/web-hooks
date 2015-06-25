@@ -16,9 +16,13 @@ class Links extends Migration {
 		Schema::create('links', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->string('link');
-            $table->timestamps();
+			$table->string('name');
+            $table->boolean('active')->default(true);
+			$table->timestamps();
 		});
+		
+
+
 	}
 
 	/**

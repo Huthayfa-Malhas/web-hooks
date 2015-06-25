@@ -12,7 +12,7 @@ class User extends Eloquent implements ConfideUserInterface
 	}
 
 	public function cases(){		
-		return $this->belongsToMany('Cases', 'case_user', 'user_id', 'case_id')->withTimestamps();
+		return $this->belongsToMany('Case1', 'case_user', 'user_id', 'case_id')->withTimestamps();
 	}
 
 
