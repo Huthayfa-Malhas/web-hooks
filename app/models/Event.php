@@ -6,12 +6,12 @@ class Event extends \Eloquent {
     
     public function users()
     {
-        return $this->belongsToMany('\Webhooks\Models\User', 'webhooks', 'event_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany('\Webhooks\Models\User', 'event_user', 'event_id', 'user_id')->withTimestamps();
 
     }
 
     public function urls()
     {
-        return $this->belongsToMany('\Webhooks\Models\Url', 'webhooks', 'event_id','link_id')->withTimestamps();
+        return $this->belongsToMany('\Webhooks\Models\Url', 'event_user', 'event_id','url_id')->withTimestamps();
     }
 }
