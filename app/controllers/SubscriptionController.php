@@ -43,50 +43,22 @@ class SubscriptionController extends \BaseController {
 	 */
 	public  function show($id)
 	{
-			$i=0;
-			$sentnames = array();
-			$eventss = Webhooks\Models\User::find($id)->events->toArray();
-			//$eventss= User::find($id)->cases;
-			//dd($eventss );
-			$numofevents=count($eventss);
 			
-			$eventurls = \Webhooks\Models\Event::find($eventss[0]["id"])->urls->toArray();
+			$sentnames = array();
+			$eventss = Webhooks\Models\User::find($id)->events->all();
+			/*$test = $eventss->urls->all();
+			for($i=0 ; $i<sizeof($test) ; $i++){
+				$map = $test[$i];
+			}
+$d=json_decode([$id ], [$map]);
+dd($d);
+
+			$result = array();*/
+
+			//$numofevents=count($eventss);
 
 
-
-  //dd($eventurls);
-		
-
-//[{"id":5},{},{}]
-
-for ($i=0; $i <$numofevents ; $i++) { 
-	$sentnames[$i]=$eventss[$i]['name'];
-}
-
-
-
-//dd($sentnames);
-
-
-
-//$i=1;
- //$sentdata = array();
-
-	/*	foreach ($user->cases as $case)
-		{
-		$caseforuser= $case->pivot->case_id;
-		$userevents  = Case1::find($caseforuser);
-		
-		$sentdata[$i]=$userevents['name'];
-
-		//echo $userevents;
-	//echo "<br>";
-	$i++;
-		}
-*/
-//return $sentnames;
-//return View::make('session');
- return View::make('session')->with($sentnames);
+     return View::make('session',array('sentnames' => $eventss));
 }
 	/**
 	 * Show the form for editing the specified resource.
