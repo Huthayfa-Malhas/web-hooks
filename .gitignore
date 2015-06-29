@@ -1,6 +1,9 @@
 /bootstrap/compiled.php
 /app/config/local
+<<<<<<< HEAD
 /app/config/mail.php
+=======
+>>>>>>> 11bb29e81376279079ff49ef6816d52d1364814b
 /vendor
 composer.phar
 composer.lock

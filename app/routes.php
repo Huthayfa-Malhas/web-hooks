@@ -9,6 +9,7 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+
 Route::get('/k', function()
 {
 	
@@ -42,3 +43,4 @@ Route::post('users/reset_password', 'UsersController@doResetPassword');
 Route::get('users/logout', 'UsersController@logout');
 Route::resource('unsub', 'SubscriptionController@destroy');
 Route::resource('getall', 'SubscriptionController@show');
+
