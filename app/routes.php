@@ -10,10 +10,10 @@
 |
 */
 
-Route::get('/k', function()
+Route::get('/', function()
 {
 	
-	return View::make('session');
+	return View::make('index');
 });
 
 
@@ -43,4 +43,5 @@ Route::post('users/reset_password', 'UsersController@doResetPassword');
 Route::get('users/logout', 'UsersController@logout');
 Route::resource('unsub', 'SubscriptionController@destroy');
 Route::resource('getall', 'SubscriptionController@show');
+Route::resource('update', 'SubscriptionController@update');
 
