@@ -12,8 +12,8 @@ class Urls extends Migration {
         {
             $table->increments('id');
             $table->string('callback_url');
-            $table->integer('subscribe_id')->unsigned();
-            $table->foreign('subscribe_id')->references('id')->on('event_user')->onDelete('cascade');
+            $table->integer('subscription_id')->unsigned();
+            $table->foreign('subscription_id')->references('id')->on('subscriptions')->onDelete('cascade');
             $table->timestamps();
         });
     }

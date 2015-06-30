@@ -2,7 +2,11 @@
 
 class Url extends \Eloquent {
     
-    protected $table = 'urls';
-    protected $fillable = ['callback_url','subscribe_id'];
+    protected $fillable = ['callback_url','subscription_id'];
 
+    public function subscription()
+    {
+        return $this->belongsTo('\Webhooks\Models\Subscription')->withTimestamps();
+
+    }
 }
