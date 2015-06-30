@@ -8,17 +8,11 @@ use \Zizaco\Confide;
 
 class User extends \Eloquent implements \Zizaco\Confide\ConfideUserInterface
 {
-    protected $table = 'users';
     protected $fillable = ["username","email","password","confirmation_code","remember_token","confirmed"];
 
-    public function urls()
+    public function subscriptions()
     {
-        return $this->belongsToMany('\Webhooks\Models\Url', 'event_user', 'user_id', 'url_id')->withTimestamps();
-    }
-
-    public function events()
-    {
-        return $this->belongsToMany('Webhooks\Models\Event', 'event_user', 'user_id', 'event_id')->withTimestamps();
+        return $this->hasMany('\Webhooks\Models\Subscription')->withTimestamps();
     }
 
    use \Zizaco\Confide\ConfideUser;
