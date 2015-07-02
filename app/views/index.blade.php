@@ -28,14 +28,14 @@ $(document).ready(function(){
     <ul class="nav nav-tabs" id="myTab">
 
         <li><a data-toggle="tab" href="#Home">Home</a></li>
-        <li><a data-toggle="tab" href="#myEvents">My Events</a></li>
+        <li><a data-toggle="tab" id="getEvents" href="#myEvents">My Events</a></li>
         <li><a data-toggle="tab" href="#subscribe">Subscribe Event</a></li>
         <li><a data-toggle="tab" href="#testwebhook">Test Web-Hooks</a></li>
     </ul>
     <div class="tab-content">
         <div id="Home" class="tab-pane fade in active">
            <h3> Yamsafer Web-hooks </h3>
-            <div style="text-align:left">
+            <div style="text-align:left"> 
                <p>Yamsafer.me ("The Traveller" in Arabic) is a rapidly-growing hotel booking site. We enable Arabs to easily find and book hotels, with or without a credit card.</p>
                 <p> Yamsafer Webhooks allow you to build or set up integrations which subscribe to certain events on GitHub.com. When one of those events is triggered, we’ll send a HTTP POST payload to the webhook’s configured URL. Webhooks can be used to update an external issue tracker, trigger CI builds, update a backup mirror, or even deploy to your production server.</p>
             </div>        
@@ -44,62 +44,36 @@ $(document).ready(function(){
         <div id="myEvents" class="tab-pane fade">
             <h3>My Events</h3>
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                  <div class="panel panel-default">
-                    <div style=" position: relative;float: right;margin-top: 4px;margin-right: 4px; ">
-                            <input type="checkbox" checked  data-toggle="toggle">
+                   @for ($i = 0; $i < sizeof($Eventname); $i++)
+                      <div class="panel panel-default">
+                        <div style=" position: relative;float: right;margin-top: 4px;margin-right: 4px; ">
+                                @if ($Events[$i]['active'] == 1 ) 
+                                <input type="checkbox" class="EventActive" id="{{ $Eventname[$i][0]['id']}}" checked data-toggle="toggle">
+                                @else
+                                <input type="checkbox" class="EventActive" id="{{ $Eventname[$i][0]['id']}}" data-toggle="toggle">
+                                @endif
+
                         </div>
-                    <div class="panel-heading" role="tab" id="headingOne"> 
-                      <h4 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                          Collapsible Group Item #1
-                        </a>
-                      </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                      <div class="panel-body">
-                            <div style=" position: relative;float: right;">
-                                <button type="button" class="btn btn-success">Edit</button>
-                                <button type="button" class="btn btn-danger">Delete</button>
-                            </div>
-                        www.google.com <br/>
-                        www.facebook.com <br/>
-                        www.instagram.com <br/>
+                        <div class="panel-heading" role="tab" id="Event{{ $Eventname[$i][0]['id']}}"> 
+                          <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#tabEvent{{ $Eventname[$i][0]['id']}}" aria-expanded="false" aria-controls="tabEvent{{ $Eventname[$i][0]['id']}}">
+                              {{ $Eventname[$i][0]['name']}}
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="tabEvent{{ $Eventname[$i][0]['id']}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="Event{{ $Eventname[$i][0]['id']}}">
+                          <div class="panel-body">
+                                <div style=" position: relative;float: right;">
+                                    <button type="button" id='edit' class="btn btn-success">Edit</button>
+                                    <input type="button" class="btn btn-danger" onClick="$(this).delete({{ $Eventname[$i][0]['id']}})" value="Delete">
+                                </div>
+                                @for ($j = 0; $j < count($Url[$i]) ; $j++ )
+                                  {{ $Url[$i][$j]['callback_url']}}<br>
+                                @endfor
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingTwo">
-                      <h4 class="panel-title">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                          Collapsible Group Item #2
-                        </a>
-                      </h4>
-                    </div>
-                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                      <div class="panel-body">
-                         <div style=" position: relative;
-                                    float: right;">
-                                <button type="button" class="btn btn-success">Edit</button>
-                                <button type="button" class="btn btn-danger">Delete</button>
-                            </div>
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingThree">
-                      <h4 class="panel-title">
-                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                          Collapsible Group Item #3
-                        </a>
-                      </h4>
-                    </div>
-                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                      <div class="panel-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                      </div>
-                    </div>
-                  </div>
+                  @endfor
                 </div>
         </div>
         
@@ -107,35 +81,37 @@ $(document).ready(function(){
             <h3>Subscribe Event</h3>
             <form>
                 <div id="eventError" class="form-group">
-                    <input type="text" class="form-control" id="EventName" placeholder="Event name">
+                    <select class="form-control" id="eventSelected">
+                      <option value='null'>Select Event</option>
+                      @for ($i = 0; $i < sizeof($Event); $i++)
+                          <option value='{{$Event[$i]['id']}}'>{{$Event[$i]['name']}}</option>
+                      @endfor
+                    </select>
+
                 </div>
+adsasdasdasd
                 <div id="textareaError" class="form-group">
                     <textarea class="form-control" id="UrlArea" rows="5" placeholder="Enter your URLs"></textarea>
                 </div>
                 <input type="button" id="subscribeButton" value="Subscribe event" class="btn btn-primary btn-lg btn-block"/>
             </form>            
         </div>
-        
         <div id="testwebhook" class="tab-pane fade">
             <h3> Test Web-hooks </h3>
             <form>
                 <div class="form-group">
-                    <select class="form-control">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
+                    <select class="form-control" id="selectFire">
+                       <option value='null'>Select Event</option>
+                       @for ($i = 0; $i < sizeof($Event); $i++)
+                            <option value='{{$Event[$i]['id']}}'>{{$Event[$i]['name']}}</option>
+                      @endfor
                     </select>
                 </div>
-                <p class="bg-info">
-                    www.google.com<br>
-                    www.facebook.com<br>
-                </p>
+                
                 <div class="form-group">
-                    <textarea class="form-control" rows="5" placeholder="Enter your URLs"></textarea>
+                    <textarea class="form-control" id="payload" rows="5" placeholder="Enter your URLs"></textarea>
                 </div>
-                <button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button>
+                <button type="button"id="fireEvent" class="btn btn-primary btn-lg btn-block">Fire event</button>
             </form>
         </div>
     </div>

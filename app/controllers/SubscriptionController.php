@@ -1,6 +1,6 @@
 <?php
 
-use Webhooks\Models;
+use Webhooks\Models\Subscription;
 use Webhooks\Models\Event;
 use Webhooks\Models\Url;
 use Webhooks\Models\User;
@@ -14,7 +14,8 @@ class SubscriptionController extends \BaseController {
      */
     public function index()
     {
-        //
+        $Event = Event::all();
+        return View::make("index",["Event"=>$Event]);
     }
 
 
@@ -23,9 +24,11 @@ class SubscriptionController extends \BaseController {
      *
      * @return Response
      */
-    public function create()
+    public function eventActive()
     {
-        //
+        $userId = 1;
+        Subscription::where('event_id',Input::get('eventId'))->where('user_id',$userId)->update(['active'=>Input::get('active')]);
+  //      return "Done";
     }
 
     /**
@@ -37,16 +40,12 @@ class SubscriptionController extends \BaseController {
     {   
         
         $userId = 1;
-        $eventId = 1;
-        $callBackUrl = ['0' => "www.google.com", '1' => "www.facebook.com", '2' => "www.instagram.com" , '3' => "www.yamsafer.com" ];
-        
-        $Pivot = User::find($userId)->events()->attach($eventId);
-        
-        $subscribeId = User::find(1)->events()->orderBy('id')->get()[0]['pivot']['id'];
-        
+        $callBackUrl = Input::get('Url');
+        $subscription = Subscription::create(['event_id'=>Input::get('eventID'), 'user_id'=>$userId]);
         for ($i=0; $i < sizeof($callBackUrl); $i++) { 
-            $Url = Url::create(["callback_url" => $callBackUrl[$i],"subscribe_id" => $subscribeId]);
+           $Url = Url::create(["callback_url" => $callBackUrl[$i],"subscription_id" => $subscription->id]);
         }
+
         return "Event add successfully";
     }
 
@@ -57,9 +56,22 @@ class SubscriptionController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function fireEent()
     {
-        //
+        $eventId = Input::get('eventId');
+        $payload = Input::get('payload');
+        $url = Subscription::where('event_id',$eventId)->where('active',1)->get();
+        for ($i = 0; $i < count($url); $i++ ) {
+            $Urls = Url::where('subscription_id',$url[$i]['id'])->get();
+            $callback_url = $Urls[$i]['callback_url']; 
+            extract($_POST);
+            $ch = curl_init();
+            curl_setopt($ch,CURLOPT_URL, $callback_url);
+            curl_setopt($ch,CURLOPT_POSTFIELDS, $payload);
+            $result = curl_exec($ch);
+            curl_close($ch);
+        }
+            
     }
 
 
@@ -100,9 +112,10 @@ class SubscriptionController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+     public function delete()
     {
-        //
+        $userId = 1;
+        Subscription::where('event_id',Input::get('eventId'))->where('user_id', $userId)->delete();
     }
 
 
