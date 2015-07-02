@@ -44,4 +44,5 @@ Route::get('users/logout', 'UsersController@logout');
 Route::resource('unsub', 'SubscriptionController@destroy');
 Route::resource('getall', 'SubscriptionController@show');
 Route::resource('update', 'SubscriptionController@update');
+Route::resource('geteve', 'SubscriptionController@getevent');
 
