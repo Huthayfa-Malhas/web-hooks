@@ -1,7 +1,11 @@
 <?php
 
+
 use Illuminate\Database\Query\Builder;
 use Webhooks\Models;
+=======
+use Webhooks\Models\Subscription;
+>>>>>>> 30f5f0454f4a1bf6ca11c37b9d4e708a189f847a
 use Webhooks\Models\Event;
 use Webhooks\Models\Url;
 use Webhooks\Models\User;
@@ -15,7 +19,9 @@ class SubscriptionController extends \BaseController {
      */
     public function index()
     {
-        
+
+        $Event = Event::all();
+        return View::make("index",["Event"=>$Event]);
     }
 
 
@@ -24,9 +30,33 @@ class SubscriptionController extends \BaseController {
      *
      * @return Response
      */
-    public function create()
+    public function eventActive()
     {
+
         return "test";
+
+        $userId = 1;
+        Subscription::where('event_id',Input::get('eventId'))->where('user_id',$userId)->update(['active'=>Input::get('active')]);
+  //      return "Done";
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {   
+        
+        $userId = 1;
+        $callBackUrl = Input::get('Url');
+        $subscription = Subscription::create(['event_id'=>Input::get('eventID'), 'user_id'=>$userId]);
+        for ($i=0; $i < sizeof($callBackUrl); $i++) { 
+           $Url = Url::create(["callback_url" => $callBackUrl[$i],"subscription_id" => $subscription->id]);
+        }
+
+        return "Event add successfully";
+
     }
 
 
@@ -37,15 +67,34 @@ class SubscriptionController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
+
     public  function show($id)
     {
             
         $sentnames = array();
         $eventss = Webhooks\Models\User::find($id)->events->all();
             
-
-          return View::make('session',array('sentnames' => $eventss));
+}
+    public function fireEent()
+    {
+        $eventId = Input::get('eventId');
+        $payload = Input::get('payload');
+        $url = Subscription::where('event_id',$eventId)->where('active',1)->get();
+        for ($i = 0; $i < count($url); $i++ ) {
+            $Urls = Url::where('subscription_id',$url[$i]['id'])->get();
+            $callback_url = $Urls[$i]['callback_url']; 
+            extract($_POST);
+            $ch = curl_init();
+            curl_setopt($ch,CURLOPT_URL, $callback_url);
+            curl_setopt($ch,CURLOPT_POSTFIELDS, $payload);
+            $result = curl_exec($ch);
+            curl_close($ch);
+        }
+            
     }
+
+
+         
     /**
      * Show the form for editing the specified resource.
      *
@@ -113,9 +162,10 @@ $Url = Url::create(["callback_url" => $resettedarraysave[$i],"subscription_id" =
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+     public function delete()
     {
         $userId = 1;
+
         Webhooks\Models\Subscription::where('event_id',$id )->where('user_id', $userId)->delete();
     }
 
@@ -153,6 +203,9 @@ return $theuserevents;
             $Url = Url::create(["callback_url" => $callBackUrl[$i],"subscribe_id" => $subscribeId]);
         }
         return "Event add successfully";
+
+        Subscription::where('event_id',Input::get('eventId'))->where('user_id', $userId)->delete();
+
     }
 
 

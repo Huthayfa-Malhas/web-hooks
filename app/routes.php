@@ -10,11 +10,21 @@
 |
 */
 
+
 Route::get('/', function()
 {
 	
 	return View::make('index');
 });
+Route::post('subscribe','SubscriptionController@store');
+Route::get('getEvent','UserController@getEvent');
+Route::post('active','SubscriptionController@eventActive');
+Route::post('delete','SubscriptionController@delete');
+Route::post('fireEent','SubscriptionController@fireEent');
+
+
+
+
 
 
 
