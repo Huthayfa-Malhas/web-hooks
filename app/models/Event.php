@@ -1,17 +1,18 @@
 <?php namespace Webhooks\Models;
-class Event extends \Eloquent {
+class Event extends \Eloquent 
+{    
+    protected $fillable = ['name','description'];
     
-    protected $table = 'events';
-    protected $fillable = ['name'];
-    
+    public function subscriptions()
+    {
+        return $this->hasMany('\Webhooks\Models\Subscription')->withTimestamps();
+    }
     public function users()
     {
-        return $this->belongsToMany('\Webhooks\Models\User', 'event_user', 'event_id', 'user_id')->withTimestamps();
-
+        return $this->hasManyThrough('\Webhooks\Models\User', '\Webhooks\Models\Subscription');
     }
-
     public function urls()
     {
-        return $this->belongsToMany('\Webhooks\Models\Url', 'event_user', 'event_id','url_id')->withTimestamps();
+        return $this->hasManyThrough('\Webhooks\Models\Url', '\Webhooks\Models\Subscription','active');
     }
 }
