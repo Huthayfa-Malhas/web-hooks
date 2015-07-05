@@ -14,8 +14,9 @@ class SubscriptionController extends \BaseController {
      */
     public function index()
     {
+        $userId = 1;
         $Event = Event::all();
-        return View::make("index",["Event"=>$Event]);
+        return View::make("pages.subscribe",["Event"=>$Event]);
     }
 
 
@@ -41,6 +42,8 @@ class SubscriptionController extends \BaseController {
         
         $userId = 1;
         $callBackUrl = Input::get('Url');
+        $test = Subscription::where('event_id',Input::get('eventID'))->where('user_id',$userId)->get();
+        return $test[0];
         $subscription = Subscription::create(['event_id'=>Input::get('eventID'), 'user_id'=>$userId]);
         for ($i=0; $i < sizeof($callBackUrl); $i++) { 
            $Url = Url::create(["callback_url" => $callBackUrl[$i],"subscription_id" => $subscription->id]);
@@ -81,9 +84,11 @@ class SubscriptionController extends \BaseController {
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function getEventDescription()
     {
-        //
+
+        $description = Event::find(Input::get('id'));
+        return $description['description'];
     }
 
 

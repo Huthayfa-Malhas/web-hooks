@@ -20,19 +20,23 @@ class UserController extends BaseController {
 	|
 	*/
 
-	public function getEvent()
+	public function subscription()
 	{
 
 		$userId = 1;
-        $events = Subscription::where('user_id', $userId);
-        for ($i=0 ; $i < count($events->get()); $i++ ){
-    	    $eventId = $events->get()[$i]['event_id'];
-    	    $id =$events->get()[$i]['id'];
-       		$Event[$i] = Event::where('id', $eventId)->get();
-       		$Url[$i] = Url::where('subscription_id', $id)->get();
+        $subscriptions = User::find(1)->subscriptions;
+        foreach ($subscriptions as $subscription) {
+       		$event[] = Event::where('id', $subscription->event_id)->get();
+       		$url[] = Url::where('subscription_id', $subscription->id)->get();
         }
-        return View::make("index",['Event'=> Event::all(),'Eventname'=>$Event,'Events'=>$events->get(),'Url'=>$Url]);
+    	
+        return View::make("pages.subscription",['Eventname'=>$event,'Events'=>$subscriptions,'Url'=>$url]);
 
+	}
+	public function fire()
+	{
+		$event = Event::all();
+        return View::make("pages.test",["Event"=>$event]);	
 	}
 
 }

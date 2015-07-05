@@ -12,7 +12,7 @@ class User extends \Eloquent implements \Zizaco\Confide\ConfideUserInterface
 
     public function subscriptions()
     {
-        return $this->hasMany('\Webhooks\Models\Subscription')->withTimestamps();
+        return $this->hasMany('\Webhooks\Models\Subscription');
     }
     public function urls()
     {

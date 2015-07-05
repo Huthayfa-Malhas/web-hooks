@@ -1,5 +1,14 @@
  
 $(document).ready(function(e) {
+
+    $(function() {
+        var pgurl = window.location.href.substr(window.location.href.lastIndexOf("/")+1);
+        if(pgurl==''){
+            pgurl='index'
+        }
+        $("#"+pgurl).addClass("active");
+    });
+
     function validateURL(textval)
     {
         var urlregex = new RegExp("^(http:\/\/www.|https:\/\/www.|ftp:\/\/www.|www.){1}([0-9A-Za-z]+\.)");
@@ -11,6 +20,23 @@ $(document).ready(function(e) {
             location.reload();
         });
     };
+
+    $('#editSave').click(function(){
+        var value = $(this).text();
+        if(value == 'Edit')
+        {
+           $(this).text('Save');
+           $(this).addClass('btn btn-info');
+        } else
+        {
+           $(this).text('Edit');
+           $(this).addClass('btn btn-success');
+        }
+
+    });
+
+
+    $('#eventDescription').hide()
     $(".EventActive").change(function(e){
             var active;
             if (this.checked){
@@ -39,6 +65,17 @@ $(document).ready(function(e) {
  
     });
 
+    $("#eventSelected").change(function(){
+        var id = $( "#eventSelected option:selected" ).val();
+        if (id != 'null' ) {
+            $('#eventDescription').show()
+            $.post("/getDescription",{id: id},function(result){
+                $('#eventDescription').html(result);
+            });
+        } else {
+            $('#eventDescription').hide()
+        }
+    });
     $("#subscribeButton").click(function() {
 
         var flag = 0;
@@ -47,6 +84,7 @@ $(document).ready(function(e) {
         var eventID = $( "#eventSelected option:selected" ).val();
         for (var i = 0; Url.length > i; i++) {
             if( !validateURL(Url[i]) ){
+                $( "#eventSelected").addClass("form-group has-error");
                 $('#textareaError').addClass("form-group has-error");
                 flag = 0;
               break; 
@@ -59,7 +97,7 @@ $(document).ready(function(e) {
             {
                 if (result) 
                 {
-                   location.reload();
+         //          location.reload();
                     alert(result);
                 } else {
                     alert('Error')
