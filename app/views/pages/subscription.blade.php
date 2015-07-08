@@ -22,13 +22,13 @@
                         <div id="tabEvent{{ $Eventname[$i][0]['id']}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="Event{{ $Eventname[$i][0]['id']}}">
                           <div class="panel-body">
                                 <div style=" position: relative;float: right;">
-                                    <button type="button" id='editSave' class="btn btn-success">Edit</button>
+                                    <button type="button" id="{{$Eventname[$i][0]['id']}}" class="btn btn-success">Edit</button>
                                     <input type="button" class="btn btn-danger" onClick="$(this).delete({{ $Eventname[$i][0]['id']}})" value="Delete">
                                 </div>
-                                <div style="width: 540px;">
-                                    <div id='divtotext' contenteditable>
+                                <div style="width: 535px;">
+                                    <div class='divtotext' style='padding:4px 4px 1px 14px' id="divtotext{{$Eventname[$i][0]['id']}}" contenteditable='false'>
                                       @for ($j = 0; $j < count($Url[$i]) ; $j++ )
-                                        {{ $Url[$i][$j]['callback_url'].'<br>'}}
+                                        {{ '<div>'.$Url[$i][$j]['callback_url'].'</div>'}}
                                       @endfor
                                   </div>
                               </div>

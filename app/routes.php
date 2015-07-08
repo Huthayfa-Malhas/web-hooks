@@ -12,25 +12,20 @@
 
 Route::get('/',function()
 {
-	return View::make('pages.index');
-});
-Route::get('index',function()
-{
-	return View::make('pages.index');
+    return View::make('pages.index');
 });
 
+/**********      SubscriptionsController      **********/
+Route::post('subscribe','SubscriptionsController@subscribe');
+Route::post('active','SubscriptionsController@activate');
+Route::post('unsubscribe','SubscriptionsController@unsubscribe');
+Route::post('update','SubscriptionsController@update');
+Route::post('fireEent','SubscriptionsController@simulate');
 
-Route::post('subscribe','SubscriptionController@store');
-Route::get('getEvent','UserController@getEvent');
-Route::post('active','SubscriptionController@eventActive');
-Route::post('delete','SubscriptionController@delete');
-Route::post('fireEent','SubscriptionController@fireEent');
-Route::get('subscribe','SubscriptionController@index');
-Route::get('subscription','UserController@subscription');
-Route::get('webhooks','UserController@fire');
-Route::post('getDescription','SubscriptionController@getEventDescription');
+/**********      UsersController      **********/
+Route::get('webhooks','UsersController@fire');
+Route::get('subscription','UsersController@subscription');
 
-
-
-
-
+/**********      EventsController      **********/
+Route::get('getUrls','EventsController@urls');
+Route::get('subscriptions','EventsController@index');

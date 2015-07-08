@@ -5,24 +5,11 @@ use Webhooks\Models\Event;
 use Webhooks\Models\Url;
 use Webhooks\Models\User;
 
-class UserController extends BaseController {
-
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
+class UsersController extends BaseController 
+{
 
 	public function subscription()
 	{
-
 		$userId = 1;
         $subscriptions = User::find(1)->subscriptions;
         foreach ($subscriptions as $subscription) {
@@ -31,7 +18,6 @@ class UserController extends BaseController {
         }
     	
         return View::make("pages.subscription",['Eventname'=>$event,'Events'=>$subscriptions,'Url'=>$url]);
-
 	}
 	public function fire()
 	{

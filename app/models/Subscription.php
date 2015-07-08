@@ -5,16 +5,20 @@ class Subscription extends \Eloquent
     
     public function urls()
     {
-        return $this->hasMany('\Webhooks\Models\Url')->withTimestamps();
+        return $this->hasMany('\Webhooks\Models\Url');
     }
 
     public function users()
     {
-        return $this->hasMany('\Webhooks\Models\User')->withTimestamps();
+        return $this->belongsTo('\Webhooks\Models\User');
     }
 
     public function events()
     {
-        return $this->hasMany('\Webhooks\Models\Event')->withTimestamps();
+        return $this->belongsTo('\Webhooks\Models\Event');
+    }
+
+    public function scopeActive($query){
+        return $query->where('active',1);
     }
 }

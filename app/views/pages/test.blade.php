@@ -12,9 +12,11 @@
                       @endfor
                     </select>
                 </div>
-                
+                <div class="alert alert-info" id="eventUrls">
+                    
+                </div>
                 <div class="form-group">
-                    <textarea class="form-control" id="payload" rows="5" placeholder="Enter your URLs"></textarea>
+                    <textarea class="form-control" id="payload" rows="5" placeholder="Enter payload"></textarea>
                 </div>
                 <button type="button"id="fireEvent" class="btn btn-primary btn-lg btn-block ">Fire event</button>
         </form>
