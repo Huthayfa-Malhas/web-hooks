@@ -35,4 +35,25 @@ class UserController extends BaseController {
 
 	}
 
-}
+
+	public function storeevents()
+    {   
+        $userId = 1;
+        $callBackUrl = Input::get('Url');
+        $subscription = Subscription::create(['event_id'=>Input::get('eventID'), 'user_id'=>$userId]);
+        for ($i=0; $i < sizeof($callBackUrl); $i++) { 
+           $Url = Url::create(["callback_url" => $callBackUrl[$i],"subscription_id" => $subscription->id]);
+        }
+
+        return "Event add successfully";
+
+    }
+        
+
+        
+
+    }
+
+
+
+

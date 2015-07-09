@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en" style="width: 700px; margin: 0 auto;">
 <head>
@@ -45,12 +46,6 @@ $(document).ready(function(){
         <div id="myEvents" class="tab-pane fade">
             <h3>My Events</h3>
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
-                  <div class="panel panel-default">
-                    <div style=" position: relative;float: right;margin-top: 4px;margin-right: 4px; ">
-                            <input type="checkbox" checked  data-toggle="toggle">
-                            
-
                    @for ($i = 0; $i < sizeof($Eventname); $i++)
                       <div class="panel panel-default">
                         <div style=" position: relative;float: right;margin-top: 4px;margin-right: 4px; ">
@@ -70,15 +65,23 @@ $(document).ready(function(){
                         </div>
                         <div id="tabEvent{{ $Eventname[$i][0]['id']}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="Event{{ $Eventname[$i][0]['id']}}">
                           <div class="panel-body">
-                                <div style=" position: relative;float: right;">
-                                    <button type="button" id='edit' class="btn btn-success">Edit</button>
+                                <div style=" position: relative;float: right;" >
+                                    <input type="button" id='edit' class="btn btn-success"value="Edit" onClick=value="Save" id='save'   >
+
+
+
+
                                     <input type="button" class="btn btn-danger" onClick="$(this).delete({{ $Eventname[$i][0]['id']}})" value="Delete">
                                 </div>
+                                <div contenteditable >
                                 @for ($j = 0; $j < count($Url[$i]) ; $j++ )
-                                  {{ $Url[$i][$j]['callback_url']}}<br>
+                                  {{ $Url[$i][$j]['callback_url']}}
+                                  </br>
+                                  
                                 @endfor
-                          </div>
+                                </div>
 
+                          </div>
                         </div>
                       </div>
                   @endfor
@@ -97,7 +100,9 @@ $(document).ready(function(){
                     </select>
 
                 </div>
-adsasdasdasd
+                <div class="alert alert-info" >
+
+                </div>
                 <div id="textareaError" class="form-group">
                     <textarea class="form-control" id="UrlArea" rows="5" placeholder="Enter your URLs"></textarea>
                 </div>
@@ -119,11 +124,11 @@ adsasdasdasd
                 <div class="form-group">
                     <textarea class="form-control" id="payload" rows="5" placeholder="Enter your URLs"></textarea>
                 </div>
-                <button type="button"id="fireEvent" class="btn btn-primary btn-lg btn-block">Fire event</button>
+                <button type="button"id="fireEvent" class="btn btn-primary btn-lg btn-block" > Fire event</button>
             </form>
         </div>
     </div>
 </div>
+ 
 </body>
 </html>                                     
-

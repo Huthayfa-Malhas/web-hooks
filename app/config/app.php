@@ -122,6 +122,7 @@ return array(
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Workbench\WorkbenchServiceProvider',
         'Zizaco\Confide\ServiceProvider',
+        'Barryvdh\Queue\AsyncServiceProvider',
     ),
 
     /*

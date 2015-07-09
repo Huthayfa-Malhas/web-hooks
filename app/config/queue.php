@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'default' => 'sync',
+	'default' => 'async',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ return array(
 	'connections' => array(
 
 		'sync' => array(
-			'driver' => 'sync',
+			'driver' => 'sync',	
 		),
 
 		'beanstalkd' => array(
@@ -63,6 +63,9 @@ return array(
 			'queue'  => 'default',
 		),
 
+		'async' => array(
+        	'driver' => 'async',
+    	),
 	),
 
 	/*
@@ -78,7 +81,7 @@ return array(
 
 	'failed' => array(
 
-		'database' => 'mysql', 'table' => 'failed_jobs',
+		'database' => 'mysql', 'table' => 'laq_async_queue',
 
 	),
 

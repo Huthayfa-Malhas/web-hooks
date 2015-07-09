@@ -32,7 +32,9 @@ $(document).ready(function(e) {
     $("#fireEvent").click(function(){
         var eventId = $( "#selectFire option:selected" ).val();
         var payload = $("textarea#payload").val();
-        $.post("/fireEent",{eventId: eventId, payload: payload},function(result){
+        
+        
+        $.get("/handleevent",{eventId: eventId, payload: payload},function(result){
             alert(result)
         });
 
