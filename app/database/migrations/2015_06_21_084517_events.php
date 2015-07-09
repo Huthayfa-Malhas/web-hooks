@@ -16,6 +16,7 @@ class Events extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
+			$table->string('code');
 			$table->string('description');
 			$table->timestamps();
 		});
