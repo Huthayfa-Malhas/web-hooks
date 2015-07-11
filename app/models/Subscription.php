@@ -15,7 +15,7 @@ class Subscription extends \Eloquent
 
     public function events()
     {
-        return $this->belongsTo('\Webhooks\Models\Event');
+        return $this->belongsTo ('\Webhooks\Models\Event');
     }
 
     public function scopeActive($query){

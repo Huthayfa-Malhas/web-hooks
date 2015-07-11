@@ -10,6 +10,9 @@
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
     <script src="js/myScript.js"></script>
+    <script src="js/eventScript.js"></script>
+    <script src="js/userScript.js"></script>
+    <script src="js/subscriptionScript.js"></script>
     <a href='/' style="text-decoration: none; color:#337ab7">
       <img  src='images/Yamsafer_logo.png'/>
       <h1 style="font-family: Chiller; margin: -36px 150px 48px 0px;  font-size: 53px;">
@@ -20,7 +23,7 @@
   <body>
     <ul class="nav nav-tabs">
       <li id="index" ><a href="/">Home</a></li>
-      <li id="subscription" ><a href="subscription">My Events</a></li>
+      <li id="subscription" ><a href="subscription">My Subscriptions</a></li>
       <li id="subscriptions" ><a href="subscriptions">Subscribe Event</a></li>
       <li id="webhooks" ><a href="webhooks">Test Web-Hooks</a></li>
     </ul>

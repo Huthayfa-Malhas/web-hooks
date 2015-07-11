@@ -18,8 +18,8 @@ Route::get('/',function()
 /**********      SubscriptionsController      **********/
 Route::post('subscribe','SubscriptionsController@subscribe');
 Route::post('active','SubscriptionsController@activate');
-Route::post('unsubscribe','SubscriptionsController@unsubscribe');
-Route::post('update','SubscriptionsController@update');
+Route::delete('Event/unsubscribe/{id}','SubscriptionsController@unsubscribe');
+Route::put('Event/update/{id}/Urls','SubscriptionsController@update');
 Route::post('fireEent','SubscriptionsController@simulate');
 
 /**********      UsersController      **********/
@@ -27,5 +27,5 @@ Route::get('webhooks','UsersController@fire');
 Route::get('subscription','UsersController@subscription');
 
 /**********      EventsController      **********/
-Route::get('getUrls','EventsController@urls');
+Route::get('Event/{id}/Urls','EventsController@urls');
 Route::get('subscriptions','EventsController@index');
