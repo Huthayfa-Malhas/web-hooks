@@ -24,20 +24,20 @@ class UserEventHandler
 			
 			$eventinstance= new EventProcess();
 
-			 foreach ($eventsname as $event )
-			 {
-			 	if (Event::firing() == 'prefix.'.$event['name'])
-              	{
+			foreach ($eventsname as $event )
+			{
+				if (Event::firing() == 'prefix.'.$event['name'])
+				{
 
-				$eventinstance->Queueprocess($event['id'],$payload);
-                }
-    
+					$eventinstance->Queueprocess($event['id'],$payload);
+				}
+				
 
-			 }
+			}
 
 
-		
-    
+			
+			
 
 		});
 	}

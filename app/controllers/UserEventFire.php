@@ -18,11 +18,11 @@ class UserEventFire extends \BaseController
 		@$eventid=$eveid[0]['id'];
 		if (is_null ( @$eventid ))
 		{
-	       $returnData = array(
-           'status' => 'error',
-           'message' => 'Not Valid Event');
+			$returnData = array(
+				'status' => 'error',
+				'message' => 'Not Valid Event');
 
-        return Response::json($returnData, 500);
+			return Response::json($returnData, 500);
 		}
 		
 

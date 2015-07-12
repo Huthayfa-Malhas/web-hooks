@@ -21,7 +21,7 @@ class SubscriptionsController extends \BaseController
         $subscription = Subscription::create(['event_id'=>Input::get('eventID'), 'user_id'=>$userId]);
         foreach ($callBackUrl as $url) {
         //    if (!preg_match("/\b(?:(?:https?|ftp):\/\/)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$url)) 
-                $Url = Url::create(["callback_url" => $url,"subscription_id" => $subscription->id]);
+            $Url = Url::create(["callback_url" => $url,"subscription_id" => $subscription->id]);
         }
         return "Event add successfully";
     }
@@ -63,7 +63,7 @@ class SubscriptionsController extends \BaseController
         }
     }
 
-     public function unsubscribe()
+    public function unsubscribe()
     {
         $userId = 1;
         Subscription::where('event_id',Input::get('eventId'))->where('user_id', $userId)->delete();
