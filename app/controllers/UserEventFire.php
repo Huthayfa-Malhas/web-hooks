@@ -14,8 +14,8 @@ class UserEventFire extends \BaseController
 	{
 
 		$eveid = Webhooks\Models\Event::where('name',$eventname)->get();
-		
 		@$eventid=$eveid[0]['id'];
+		
 		if (is_null ( @$eventid ))
 		{
 			$returnData = array(

@@ -9,6 +9,7 @@ class UserEventHandler
     {
         Event::listen('prefix.*', function($eventname, $eventid, $payload) {
             $eventsname = Webhooks\Models\Event::all();
+         
             $eventinstance = new EventProcess();
             foreach ($eventsname as $event) {
                 if (Event::firing() == 'prefix.'.$event['name']) {

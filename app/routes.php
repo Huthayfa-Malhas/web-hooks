@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Event;
 */
 
 Route::get('handleevent/{eventname}/{payload}',['uses'=>'UserEventFire@webhookfire'] );
- 
+
 
 
 Route::get('/', function()
