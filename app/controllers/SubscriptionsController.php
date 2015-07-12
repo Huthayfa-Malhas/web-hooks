@@ -11,18 +11,20 @@ class SubscriptionsController extends \BaseController
     public function activate()
     {
         $userId = 1;
-        Subscription::where('event_id',Input::get('eventId'))->where('user_id',$userId)->update(['active'=>Input::get('active')]);
+        Subscription::where('event_id', Input::get('eventId'))->where('user_id', $userId)->update(['active' => Input::get('active')]);
     }
 
     public function subscribe()
     {   
         $userId = 1;
         $callBackUrl = Input::get('Url');
-        $subscription = Subscription::create(['event_id'=>Input::get('eventID'), 'user_id'=>$userId]);
+        $subscription = Subscription::create(['event_id' => Input::get('eventID'), 'user_id' => $userId]);
         foreach ($callBackUrl as $url) {
-        //    if (!preg_match("/\b(?:(?:https?|ftp):\/\/)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$url)) 
-            $Url = Url::create(["callback_url" => $url,"subscription_id" => $subscription->id]);
+            if ( ! preg_match("/\b(?:(?:https?|ftp):\/\/)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$url)) {
+                $Url = Url::create(["callback_url" => $url, "subscription_id" => $subscription->id]);
+            }
         }
+
         return "Event add successfully";
     }
 
@@ -30,7 +32,7 @@ class SubscriptionsController extends \BaseController
     {
         $eventId = Input::get('eventId');
         $payload = Input::get('payload');
-        $subscriptionsUrl = Subscription::where('event_id',$eventId)->where('active',1)->get();
+        $subscriptionsUrl = Subscription::where('event_id', $eventId)->where('active', 1)->get();
         foreach ($subscriptionsUrl as $url ) {
             $urls = Url::where('subscription_id',$subscriptionsUrl['id'])->get();
             $callbackUrl = $urls['callback_url']; 
@@ -43,29 +45,32 @@ class SubscriptionsController extends \BaseController
         }
     }
 
-    public function update()
+    public function update($id)
     {
         $userId = 1;
-        $subscrip=Subscription::where('event_id',$eventId )->where('user_id',$userId )->get();
-        $subscriptionId=$subscrip[0]['id'];
-        $urlObject=Url::where('subscription_id',$subscriptionId )->get();
+        $recivedUrls = Input::get('Urls');
+        $eventUrl = [];
+        $subscrip = Subscription::where('event_id', $id)->where('user_id', $userId)->get();
+        $subscriptionId = $subscrip[0]->id;
+        $urlObject = Url::where('subscription_id',$subscriptionId )->get();
         foreach ($urlObject as $value) {
-            $eventUrl=$value['callback_url'];
+            array_push($eventUrl, $value['callback_url']);
         }
-        $recivedUrls=Input::get('Urls');
-        $resettedArrayDelete=array_values(array_diff($eventUrl, $recivedUrls));
-        $resettedArraySave=array_values(array_diff($recivedUrls, $eventUrl));
+
+        $resettedArrayDelete = array_values(array_diff($eventUrl, $recivedUrls));
+        $resettedArraySave = array_values(array_diff($recivedUrls, $eventUrl));
         foreach ($resettedArrayDelete as $value) {
             Url::where('subscription_id',$subscriptionId )->where('callback_url',$value)->delete();
         }
+
         foreach ( $resettedArraySave as $value) {
-            $Url = Url::create(["callback_url" => $value,"subscription_id" => $subscriptionId]);
+            if ( ! preg_match("/\b(?:(?:https?|ftp):\/\/)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$value))
+                $Url = Url::create(["callback_url" => $value, "subscription_id" => $subscriptionId]);
         }
     }
 
-    public function unsubscribe()
+    public function unsubscribe($id)
     {
-        $userId = 1;
-        Subscription::where('event_id',Input::get('eventId'))->where('user_id', $userId)->delete();
+        Subscription::find($id)->delete();
     }
 }
