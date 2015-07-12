@@ -13,7 +13,7 @@ return array(
     |
     */
 
-    'debug' => false,
+    'debug' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -122,7 +122,6 @@ return array(
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Workbench\WorkbenchServiceProvider',
         'Zizaco\Confide\ServiceProvider',
-        'Barryvdh\Queue\AsyncServiceProvider',
     ),
 
     /*
