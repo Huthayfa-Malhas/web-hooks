@@ -10,18 +10,23 @@ use Webhooks\Models\User;
 class UserEventFire extends \BaseController 
 {
 
-	public function webhookfire ($eventname)
+	public function webhookfire ($eventname,$payload)
 	{
+
 		$eveid = Webhooks\Models\Event::where('name',$eventname)->get();
-		$eventcode=$eveid[0]['code'];
-	
+		
 		@$eventid=$eveid[0]['id'];
 		if (is_null ( @$eventid ))
 		{
-			dd('please enter other event');
-		}
+	       $returnData = array(
+           'status' => 'error',
+           'message' => 'Not Valid Event');
 
-		Event::fire($eventcode,array($eventname,$eventid));
+        return Response::json($returnData, 500);
+		}
+		
+
+		Event::fire('prefix.'.$eventname,array($eventname,$eventid,$payload));
 
 	}
 }

@@ -11,14 +11,9 @@ use Illuminate\Support\Facades\Event;
 | and give it the Closure to execute when that URI is requested.
 |
 */
-//$x='test';
-Route::get('handleevent/{eventname}',['uses'=>'UserEventFire@webhookfire'] );
+
+Route::get('handleevent/{eventname}/{payload}',['uses'=>'UserEventFire@webhookfire'] );
  
-	// here is where the event fires
-
-	//Event::fire('test');
-
-	//dd("ss");
 
 
 Route::get('/', function()
@@ -66,6 +61,4 @@ Route::resource('getall', 'SubscriptionController@show');
 Route::resource('update', 'SubscriptionController@update');
 Route::resource('geteve', 'SubscriptionController@getevent');
 
-Route::get('testque', function() {
-	
-});
+

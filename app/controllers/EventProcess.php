@@ -8,18 +8,16 @@ class EventProcess
 {
 
 
-public function Queueprocess ($eventid)
+public function Queueprocess ($eventid,$payload)
 {
 
-$callback_url = Webhooks\Models\Event::find($eventid)->activeurls;
+ $callback_url = Webhooks\Models\Event::find($eventid)->activeurls;
 
-
-$payload1= json_decode("{'a':1,'b':2,'c':3,'d':4,'e':5}");
-foreach ($callback_url as $value) 
+  foreach ($callback_url as $value) 
    {
-	 $sent=array($payload1,$value['callback_url']);
+	  $sent=array($payload,$value['callback_url']);
 	 
-	 Queue::push('QeueHandler@posthooks',$sent);
+	  Queue::push('QeueHandler@posthooks',$sent);
     }
 
    }
