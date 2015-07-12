@@ -80,5 +80,4 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
-//dd('s');
 require app_path().'/UserEventHandler.php';

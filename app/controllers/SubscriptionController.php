@@ -29,42 +29,7 @@ class SubscriptionController extends \BaseController {
   //      return "Done";
     }
 
-    public function update($id)
-    {
-
-        
-        $eventurl=array();
-        $subscrip=Webhooks\Models\Subscription::where('event_id',$id )->where('user_id',1 )->get();
-        $subscripid=$subscrip[0]['id'];
-     //   $subscripstatus=$subscrip[0]['active'];
-        
-        $urlobject=Webhooks\Models\Url::where('subscription_id',$subscripid )->get();
-        $numofurls=count($urlobject);
-
-for($i=0;$i<$numofurls;$i++) {
-
-    $eventurl[$i]=$urlobject[$i]['callback_url'];
-}
-
-$recivedurls=array("www.yazeed.com"  , "www.url3.com", "www.qays4.com" );
-$urlstosave = array_diff($recivedurls, $eventurl);
-$urlstodelete=array_diff($eventurl, $recivedurls);
-$resettedarraydel=array_values($urlstodelete);
-$resettedarraysave=array_values($urlstosave);
-
-for($i=0;$i<count($resettedarraydel);$i++)
-{
-
-Webhooks\Models\Url::where('subscription_id',$subscripid )->where('callback_url',$resettedarraydel[$i])->delete();
-}
-for($i=0;$i<count($resettedarraysave);$i++)
-{
-$Url = Url::create(["callback_url" => $resettedarraysave[$i],"subscription_id" => $subscripid]);
-        
-}
-
-
-    }
+   
 
 
  public function delete()
