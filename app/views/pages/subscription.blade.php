@@ -27,6 +27,11 @@
         $("#TextBoxDiv"+$(this).attr('id')).remove();
       }
     }))
+
+
+
+
+    
     $('#getUrl').click(function(){
       var Url = []
       $(".form-control").each(function() {
@@ -87,15 +92,15 @@
           <input type="button" class="btn btn-danger" onClick="$(this).delete({{ $event['subscriptionsId']}})" value="Delete">
         </div>
         <div style="width: 535px;">
-          <div class='divtotext' style='padding:4px 4px 1px 14px' id="divtotext{{$event['eventId']}}" contenteditable='false'>
+
             @foreach ( $event['urls']['callback_url'] as $value)
             <div id='TextBoxesGroup'>
               <div id="TextBoxDiv1" class="form-group">
                 <div  class="input-group">
-                  <input type='text' class="form-control" value ='{{$value}}'  placeholder="Enter url" id='textbox1' readonly="" >
+                  <input type='text' class="form-control" value ='{{$value}}'  placeholder="Enter url" id='textbox1' readonly >
                   <span class="input-group-addon" id='1' >x</span>
                 </div>
-              </div>
+              
             </div>
             @endforeach
           </div>

@@ -14,12 +14,12 @@ $(document).ready(function(e) {
     $('.btn-success').click(function(){
         var value = $(this).text();
         var eventId = $(this).attr('id');
-        var id = "#divtotext"+ eventId;
+        var id = "textbox1";
         if(value == 'Edit')
         {
             $(this).text('Save');
             $(id).css({"border":"1px solid #ccc","border-radius":"5px"});
-            $(id).attr('contenteditable','true');
+            document.getElementById(id).readOnly=false;
             $(id).focus();
         } else {
             var test = $(id).html();
