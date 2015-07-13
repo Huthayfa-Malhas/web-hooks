@@ -33,8 +33,8 @@ $(document).ready(function(e) {
             } else {
                 active = 0;
             } 
-            var eventId = $(this).attr('id');
-            $.post("/active", {eventId: eventId, active:active}, function(result){});
+            var subscriptionsId = $(this).attr('id');
+            $.post("/active/"+subscriptionsId, {active:active}, function(result){});
     });
     
 

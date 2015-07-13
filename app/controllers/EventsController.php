@@ -7,12 +7,12 @@ use Webhooks\Models\User;
 
 class EventsController extends BaseController 
 {
-     public function index()
+     public function subscriptions()
     {          
         $userId = 1;
         $subscriptions = User::find($userId)->subscriptions->toArray();
         $eventsId = array_fetch($subscriptions,'event_id');
-        $Event = Event::whereNotIn('id', $eventsId)->get();
+        $Event = Event::whereNotIn('id', $eventsId)->get()->toArray();
         return View::make("pages.subscribe",["Event"=>$Event]);
     }
 
