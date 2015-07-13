@@ -4,11 +4,11 @@ $(document).ready(function(e) {
     $.fn.delete = function(id)
     {
         $.ajax({
-                type: 'Delete',
-                url: "/Event/unsubscribe/"+id,
-                 success: function(result) {
-                    location.reload();
-                }
+            type: 'Delete',
+            url: "/Event/unsubscribe/"+id,
+            success: function(result) {
+                location.reload();
+            }
         });
     }
     $('.btn-success').click(function(){
@@ -25,17 +25,17 @@ $(document).ready(function(e) {
             var test = $(id).html();
             var Url = [];
             $.each((test.split('</div>')), function(){
-               try{
-                    var urlBody = (($.trim(this).replace(/<div>/g,' ')).replace(/<br>/g,' '));
-                    urlBody = $(urlBody).text()
-               } catch (err) {
-                    var urlBody = ($.trim(this).replace(/<div>/g,' ')).replace(/<br>/g,' ');
-               }finally {}
-               urlBody = urlBody.replace(/&nbsp;/g, "")
-               urlBody = urlBody.replace(/\s/g, "")
-                if (!isEmpty(urlBody) && validateURL(urlBody))
-                    Url.push((urlBody));
-            });
+             try{
+                var urlBody = (($.trim(this).replace(/<div>/g,' ')).replace(/<br>/g,' '));
+                urlBody = $(urlBody).text()
+            } catch (err) {
+                var urlBody = ($.trim(this).replace(/<div>/g,' ')).replace(/<br>/g,' ');
+            }finally {}
+            urlBody = urlBody.replace(/&nbsp;/g, "")
+            urlBody = urlBody.replace(/\s/g, "")
+            if (!isEmpty(urlBody) && validateURL(urlBody))
+                Url.push((urlBody));
+        });
             $(this).text('Edit');
             $(id).css("border", "0px");
             $(id).attr('contenteditable','false');

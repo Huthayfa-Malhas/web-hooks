@@ -13,7 +13,7 @@ class EventsController extends BaseController
         $subscriptions = User::find($userId)->subscriptions->toArray();
         $eventsId = array_fetch($subscriptions,'event_id');
         $Event = Event::whereNotIn('id', $eventsId)->get();
-        return View::make("pages.subscribe",["Event"=>$Event]);
+        return View::make("pages.subscription",["Event"=>$Event]);
     }
 
     public function urls($id)

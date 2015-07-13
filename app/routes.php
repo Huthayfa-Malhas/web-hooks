@@ -12,47 +12,26 @@ use Illuminate\Support\Facades\Event;
 |
 */
 
-Route::get('handleevent/{eventname}/{payload}',['uses'=>'UserEventFire@webhookfire'] );
+Route::get('handleevent/{eventname}/{payload}',['uses'=>'FireEvents@webhookfire'] );
 
 
-
-Route::get('/', function()
+Route::get('/',function()
 {
-	
-	return View::make('index');
+    return View::make('pages.index');
 });
-Route::post('subscribe','UserController@storeevents');
-Route::get('getEvent','UserController@getEvent');
-Route::post('active','SubscriptionController@eventActive');
-Route::post('delete','SubscriptionController@delete');
-Route::post('testwebhook','EventController@testwebhook');
-
-
-
-
-
-
-
-Route::get('d','\App\Controllers\SessionController@create');
-
-	// here is where the events fire
-//	Event::fire('user.login');
-//	Event::fire('user.newsletter');
-//	Event::fire('user.logout');
-//});
-	Route::resource('sub', 'SubscriptionController');
-
-
-
-
+Route::get('index2',function()
+{
+    return View::make('pages.index2');
+});
 /**********      SubscriptionsController      **********/
 Route::post('subscribe','SubscriptionsController@subscribe');
 Route::post('active','SubscriptionsController@activate');
 Route::delete('Event/unsubscribe/{id}','SubscriptionsController@unsubscribe');
 Route::put('Event/update/{id}/Urls','SubscriptionsController@update');
 Route::post('fireEent','SubscriptionsController@simulate');
-
-
+/**********      UsersController      **********/
+Route::get('webhooks','UsersController@fire');
+Route::get('subscription','UsersController@subscription');
 /**********      EventsController      **********/
 Route::get('Event/{id}/Urls','EventsController@urls');
 Route::get('subscriptions','EventsController@index');
