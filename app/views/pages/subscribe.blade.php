@@ -8,13 +8,7 @@
   You subscribe all events
 </div>
 @else
-<div class="alert alert-success">
-  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong> Event subscribed successfully.</strong>
-</div>  
-<div class="alert alert-danger">
-  <strong id="Error"></strong> 
-</div>
+
 <form>
   <div id="eventError" class="form-group">
     <select class="form-control" id="eventSelected">
@@ -33,15 +27,13 @@
     </strong>
   </div>
   @endforeach
-
-  <br/>
   <div id='TextBoxesGroup'>
     <div id="TextBoxDiv1" class="form-group">
       <div  class="input-group">
         <div class="input-group-addon check1" title=" Url validation">
           <span class="glyphicon glyphicon-minus" style='color:#eee' aria-hidden="true"></span>
         </div>
-        <input type='text' class="form-control"  placeholder="Enter url" id='textbox1' >
+        <input type='text' class="form-control" name='textUrl' placeholder="Enter url" id='textbox1' >
         <a style="cursor:pointer" class="input-group-addon" id='1' >
           <span style="font-size: 18px;" title="Delete this field" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
         </a>

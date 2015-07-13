@@ -3,17 +3,22 @@ $(document).ready(function(e) {
 
     $("#subscribeButton").click(function() {
 
-        var fieldsNumber =  $('.form-control').length
+        var allemptylength=$(".form-control").filter(function() {
+            return isEmpty(this.value.length);
+        })
+        console.log(allemptylength.length)
+        var fieldsNumber =  $('input[name="textUrl"]').length - allemptylength.length
         var validfieldsNumber =  $('.glyphicon-ok').length
         var eventID = $( "#eventSelected option:selected" ).val();
         Url = []
+        console.log("fields# :"+fieldsNumber+ ' validfields# : '+validfieldsNumber)
         if(fieldsNumber == validfieldsNumber){
             $(".form-control").each(function() {
                 var urlBody = $(this).val();
                 if(validateURL(urlBody))
                     Url.push(urlBody);
             });
-
+            console.log(Url)
             $.post("/subscribe", {eventID: eventID, Url:Url}, function(result)
             {
             });
@@ -52,7 +57,7 @@ $(document).ready(function(e) {
     $("#addButton").click(function () {
         var newTextBoxDiv = $(document.createElement('div')).attr({"id":'TextBoxDiv' + counter, "class":"form-group " });
         newTextBoxDiv.after().html(
-            '<div class="input-group"><div title=" Url validation" class="input-group-addon check'+counter+'"><span class="glyphicon glyphicon-minus" style="color:#eee" aria-hidden="true"></span></div><input type="text" class="form-control" placeholder="Enter url" name="textbox' + counter + 
+            '<div class="input-group"><div title=" Url validation" class="input-group-addon check'+counter+'"><span class="glyphicon glyphicon-minus" style="color:#eee" aria-hidden="true"></span></div><input type="text" class="form-control" name="textUrl" placeholder="Enter url" name="textbox' + counter + 
             '" id="textbox' + counter + '"  >'
             +'<a class="input-group-addon"style="cursor:pointer" id="'+counter+'"><span class="glyphicon glyphicon-remove-circle" title="Delete this field" style="font-size: 18px;" aria-hidden="true"></span></a></div>');
         newTextBoxDiv.appendTo("#TextBoxesGroup");
