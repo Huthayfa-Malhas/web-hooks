@@ -1,18 +1,13 @@
 <?php namespace Webhooks\Models;
 
-class Url extends \Eloquent {
+class Url extends \Eloquent 
+{
     
-    protected $table = 'urls';
-    protected $fillable = ['callback_url'];
+    protected $fillable = ['callback_url','subscription_id'];
 
-    public function users()
+    public function subscription()
     {
-        return $this->belongsToMany('\Webhooks\Models\User', 'event_user', 'url_id', 'user_id')->withTimestamps();
-    }
+        return $this->belongsTo('\Webhooks\Models\Subscription');
 
-    public function events()
-    {
-        return $this->belongsToMany('\Webhooks\Models\Event', 'event_user', 'url_id', 'event_id')->withTimestamps();
     }
-
 }
