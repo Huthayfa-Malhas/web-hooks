@@ -10,10 +10,10 @@ class FireEvents extends \BaseController
 {
 	public static function  webhookfire ($eventname,$payload)
 	{
-		$eveid = Webhooks\Models\Event::where('name',$eventname)->get();
-		@$eventid=$eveid[0]['id'];
+		$event = Webhooks\Models\Event::where('name',$eventname)->get();
 		
-		if (is_null ( @$eventid ))
+		
+		if (is_null ( @$event[0]['id'] ))
 		{
 			$returnData = array(
 				'status' => 'error',
@@ -21,7 +21,7 @@ class FireEvents extends \BaseController
 			return Response::json($returnData, 500);
 		}
 		
-		Event::fire('prefix.'.$eventname,array($eventname,$eventid,$payload));
+		Event::fire('prefix.'.$eventname,array($event,$payload));
 	}
 
     
