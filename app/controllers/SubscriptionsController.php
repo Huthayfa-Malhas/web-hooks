@@ -22,7 +22,7 @@ class SubscriptionsController extends \BaseController
             if (preg_match("/\b(?:(?:https?|ftp):\/\/)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$url)) 
                 $Url = Url::create(["callback_url" => $url,"subscription_id" => $subscription->id]);
         }
-        return "Event add successfully";
+        return "success";
     }
 
     public function simulate()

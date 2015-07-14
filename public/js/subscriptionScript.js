@@ -12,15 +12,18 @@ $(document).ready(function(e) {
         var eventID = $( "#eventSelected option:selected" ).val();
         Url = []
         console.log("fields# :"+fieldsNumber+ ' validfields# : '+validfieldsNumber)
-        if(fieldsNumber == validfieldsNumber){
+        if((fieldsNumber == validfieldsNumber) && (fieldsNumber != 0) && (validfieldsNumber != 0) ) {
             $(".form-control").each(function() {
                 var urlBody = $(this).val();
                 if(validateURL(urlBody))
                     Url.push(urlBody);
             });
-            console.log(Url)
             $.post("/subscribe", {eventID: eventID, Url:Url}, function(result)
             {
+                if ('success' == result) {
+                    alert("Event Add Successfully")
+                    location.reload();
+                }
             });
         }
     });
