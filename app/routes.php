@@ -9,10 +9,34 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+use Vinelab\Http\Client as HttpClient;
+require './vendor/autoload.php';
 
+Route::get('/test',function()
+{
+	return "test";
+});
 Route::get('/',function()
 {
-    return View::make('pages.index');
+	$client = new HttpClient;
+	$request = [
+        'url' => 'http://requestb.in/xsx5xhxs',
+        'params' => [
+        	'Qays Dwekat'=>'11001872',
+			'format' 	=> 'json',
+			'topic'		=> 'order/created',
+			'url'		=> 'http://myshop.example.com/notify_me'
+        ],
+        'json' => true
+    ];
+
+    $response = $client->post($request);
+
+    // raw content
+    $httpCode =  $response->info();
+    return $httpCode;
+
+	//   return View::make('pages.index');
 });
 
 /**********      SubscriptionsController      **********/
