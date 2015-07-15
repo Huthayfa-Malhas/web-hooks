@@ -6,13 +6,13 @@ class EventTableSeeder extends Seeder
 {
 	public function run()
 	{
-        Event::create(["name"=>"Create User","code"=>"User.Create","description"=>"Add new User"]);
-        Event::create(["name"=>"Create Hotel","code"=>"Hotel.Create","description"=>"Add new Hotel"]);
-        Event::create(["name"=>"Hotel Ranking","code"=>"Rank.Hotel","description"=>"Hotel Ranking increase or decrease "]);
-        Event::create(["name"=>"No Price","code"=>"","description"=>"No Hotel price show"]);
-        Event::create(["name"=>"No Show","code"=>"","description"=>"The User doesn't coming to Hotel"]);
-        Event::create(["name"=>"New Location","code"=>"Location.New","description"=>"add new location to the database"]);
-        Event::create(["name"=>"New Booking","code"=>"Book.New","description"=>"new booking at Hotel add by customer"]);
+        Event::create(["name"=>"New User","description"=>"Inform you when new user is added to the system"]);
+        Event::create(["name"=>"New Hotel","description"=>"Informs with new added hotels on the systems"]);
+        Event::create(["name"=>"Ranking Varitation ","description"=>"infroms the user with hotel ranking larg increase or decrease "]);
+        Event::create(["name"=>"Hotel Payments","description"=>"Reminds the user with close dates of hotels contracts and thier payments "]);
+        Event::create(["name"=>"Customer Services","description"=>"Notify the user that customer has not applied his reservation in specfic hotel "]);
+        Event::create(["name"=>" New Locations","description"=>"add new location to the database"]);
+        Event::create(["name"=>"New Booking","description"=>"new booking at Hotel add by customer"]);
 	}
 }
 

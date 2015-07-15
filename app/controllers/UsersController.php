@@ -8,7 +8,7 @@ use Webhooks\Models\User;
 class UsersController extends BaseController 
 {
 
-    public function subscription()
+    public function subscriptions()
     {
         $userId = 1;
         $subscriptions = User::find($userId)->subscriptions;

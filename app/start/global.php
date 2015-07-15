@@ -18,6 +18,7 @@ ClassLoader::addDirectories(array(
 	app_path().'/models',
 	app_path().'/database/seeds',
 
+
 ));
 
 /*
@@ -79,3 +80,5 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+require app_path().'/WebhooksFire.php';
+require './vendor/autoload.php';
