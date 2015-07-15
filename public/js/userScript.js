@@ -14,36 +14,38 @@ $(document).ready(function(e) {
     $('.btn-success').click(function(){
         var value = $(this).text();
         var eventId = $(this).attr('id');
-        var id = "textbox1";
+        var res = "#tabEvent"+eventId;
+        var panel= $(res);
+        var inputs = panel.find("input");
+      
+
         if(value == 'Edit')
         {
             $(this).text('Save');
-            $(id).css({"border":"1px solid #ccc","border-radius":"5px"});
-            document.getElementById(id).readOnly=false;
-            $(id).focus();
+            inputs.each(function(){
+            $(this).attr('readonly', false);
+;
+        });  
+
         } else {
-            var test = $(id).html();
-            var Url = [];
-            $.each((test.split('</div>')), function(){
-             try{
-                var urlBody = (($.trim(this).replace(/<div>/g,' ')).replace(/<br>/g,' '));
-                urlBody = $(urlBody).text()
-            } catch (err) {
-                var urlBody = ($.trim(this).replace(/<div>/g,' ')).replace(/<br>/g,' ');
-            }finally {}
-            urlBody = urlBody.replace(/&nbsp;/g, "")
-            urlBody = urlBody.replace(/\s/g, "")
-            if (!isEmpty(urlBody) && validateURL(urlBody))
-                Url.push((urlBody));
-        });
             $(this).text('Edit');
-            $(id).css("border", "0px");
-            $(id).attr('contenteditable','false');
-            $.ajax({
+            Url = []
+            inputs.each(function(){
+                var urlBody =$(this).val();
+               if(isEmpty(urlBody))
+               $('#TextBoxDiv1').remove() 
+                if(validateURL(urlBody))
+                    Url.push(urlBody)
+
+                $(this).attr('readonly', true);
+            });
+            console.log(Url)
+            /*
+             $.ajax({
                 type: 'PUT',
                 url: "/Event/update/"+eventId+"/Urls",
                 data: {Urls:Url}
-            });
+            });*/
         }
     });
 

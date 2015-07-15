@@ -13,11 +13,18 @@ use Illuminate\Support\Facades\Event;
 */
 
 Route::get('handleevent/{eventname}/{payload}',['uses'=>'FireEvents@webhookfire'] );
+//Route::get('tes/{eventname}/{payload}',['uses'=>'FireEvents@webhookfire'] );
 
 
-Route::get('/',function()
+Route::get('test',function()
 {
-    return View::make('pages.index');
+	$data = "testing";
+Queue::push(function($job) use ($data){
+
+\Log::debug($data);
+
+});
+   
 });
 Route::get('index2',function()
 {

@@ -1,7 +1,7 @@
  @extends('layouts.default')
  @section('content')
  <style type="text/css">
-  
+
   #TextBoxesGroup{
     width: 600px;
   }
@@ -10,9 +10,9 @@
 </head>
 <br> <br> <br> 
 <script type="text/javascript">
- 
+
   $(document).ready(function(){
-   
+
 
     $(document).on('click',".input-group-addon", (function () {
       var value = $("#textbox" + $(this).attr('id')).val()
@@ -31,7 +31,7 @@
 
 
 
-    
+
     $('#getUrl').click(function(){
       var Url = []
       $(".form-control").each(function() {
@@ -46,40 +46,45 @@
       console.log(Url)
     });
     
-    var counter = 2
-    $("#addButton").click(function () {
+    $.fn.add = function(divId)
+    {
      
-      var newTextBoxDiv = $(document.createElement('div')).attr({"id":'TextBoxDiv' + counter, "class":"form-group " });
-      
-      newTextBoxDiv.after().html(
-        '<div class="input-group"><input type="text" class="form-control" placeholder="Enter url" name="textbox' + counter + 
-        '" id="textbox' + counter + '"  >'
-        +'<a class="input-group-addon" id="'+counter+'">x</a></div>');
+     var counter = 2
+     var newTextBoxDiv = $(document.createElement('div')).attr({"id":'TextBoxDiv' + counter, "class":"form-group " });
 
-      
-      newTextBoxDiv.appendTo("#TextBoxesGroup");
-      counter++;
-    });
-    
+     newTextBoxDiv.after().html(
+      '<div class="input-group"><input type="text" class="form-control" placeholder="Enter url" name="textbox' + counter + 
+      '" id="textbox' + counter + '"  >'
+      +'<a class="input-group-addon" id="'+counter+'">x</a></div>');
 
-    
-  });
+
+     newTextBoxDiv.appendTo("#"+divId);
+     counter++;
+   });
+
+
+
+  }); 
 </script>
 
 <h3>My Subscriptions</h3>
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   @foreach ( $eventInformation as $event)
   <div class="panel panel-default">
+
     <div style=" position: relative;float: right;margin-top: 4px;margin-right: 4px; ">
+
       @if ($event['active'] == 1 ) 
       <input type="checkbox" class="EventActive" id="{{ $event['eventId']}}" checked data-toggle="toggle">
       @else
       <input type="checkbox" class="EventActive" id="{{ $event['eventId']}}" data-toggle="toggle">
       @endif
 
+
     </div>
     <div class="panel-heading" role="tab" id="Event{{ $event['eventId']}}"> 
       <h4 class="panel-title">
+        <div class="glyphicon glyphicon-trash" style="cursor:pointer" onClick="$(this).delete({{ $event['subscriptionsId']}})"></div>
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#tabEvent{{ $event['eventId']}}" aria-expanded="false" aria-controls="tabEvent{{ $event['eventId']}}">
           {{ $event['eventName']}}
         </a>
@@ -89,23 +94,33 @@
       <div class="panel-body">
         <div style=" position: relative;float: right;">
           <button type="button" id="{{$event['eventId']}}" class="btn btn-success">Edit</button>
-          <input type="button" class="btn btn-danger" onClick="$(this).delete({{ $event['subscriptionsId']}})" value="Delete">
+          
+          
         </div>
-        <div style="width: 535px;">
 
-            @foreach ( $event['urls']['callback_url'] as $value)
-            <div id='TextBoxesGroup'>
-              <div id="TextBoxDiv1" class="form-group">
-                <div  class="input-group">
-                  <input type='text' class="form-control" value ='{{$value}}'  placeholder="Enter url" id='textbox1' readonly >
-                  <span class="input-group-addon" id='1' >x</span>
-                </div>
+        <div style="width: 535px;">
+          <?php $i=1;?>
+          @foreach ( $event['urls']['callback_url'] as $value)
+
+          <div id='TextBoxesGroup'>
+            <div id="TextBoxDiv1" class="form-group">
+              <div  class="input-group">
+                <input type='text' class="form-control" value ='{{$value}}'  placeholder="Enter url" id='textbox{{$i++}}' readonly >
+                <span class="input-group-addon" id='1' >x</span>
+
+              </div>
               
             </div>
             @endforeach
+
           </div>
+          <div class="glyphicon glyphicon-plus" style="cursor:pointer" onclick=""></div>
+          
         </div>
+
+
       </div>
+
     </div>
   </div>
   @endforeach
