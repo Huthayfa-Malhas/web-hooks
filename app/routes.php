@@ -13,23 +13,8 @@ use Illuminate\Support\Facades\Event;
 */
 
 Route::get('handleevent/{eventname}/{payload}',['uses'=>'FireEvents@webhookfire'] );
-//Route::get('tes/{eventname}/{payload}',['uses'=>'FireEvents@webhookfire'] );
 
 
-Route::get('test',function()
-{
-	$data = "testing";
-Queue::push(function($job) use ($data){
-
-\Log::debug($data);
-
-});
-   
-});
-Route::get('index2',function()
-{
-    return View::make('pages.index2');
-});
 /**********      SubscriptionsController      **********/
 Route::post('subscribe','SubscriptionsController@subscribe');
 Route::post('active','SubscriptionsController@activate');
