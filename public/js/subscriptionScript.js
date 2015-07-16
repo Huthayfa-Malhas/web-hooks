@@ -23,7 +23,7 @@ $("#subscribeButton").click(function() {
         console.log(Url)
 
         if(flag == 1) {
-            $.post("/subscribe", {eventID: eventID, Url:Url}, function(result)
+            $.post("/subscriptions/subscribe", {eventID: eventID, Url:Url}, function(result)
             {
                 if (result) 
                 {

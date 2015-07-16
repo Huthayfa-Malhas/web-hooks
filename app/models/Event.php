@@ -7,11 +7,6 @@ class Event extends \Eloquent
     {
         return $this->hasMany('\Webhooks\Models\Subscription', 'event_id');
     }
-    
-    public function users()
-    {
-        return $this->hasManyThrough('\Webhooks\Models\User', '\Webhooks\Models\Subscription');
-    }
 
     public function urls()
     {
@@ -20,6 +15,6 @@ class Event extends \Eloquent
 
     public function activeurls()
     {
-        return $this->hasManyThrough('\Webhooks\Models\Url', '\Webhooks\Models\Subscription')->where('active',1);
+        return $this->urls()->where('active',1);
     }
 }

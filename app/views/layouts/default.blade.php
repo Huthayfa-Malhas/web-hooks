@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Yamsafer webhooks</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -15,7 +15,7 @@
     <script src="js/subscriptionScript.js"></script>
     <a href='/' style="text-decoration: none; color:#337ab7">
       <img  src='images/Yamsafer_logo.png'/>
-      <h1 style="font-family: Chiller; margin: -36px 150px 48px 0px;  font-size: 53px;">
+      <h1 style="font-family: Chiller; margin: -39px 0px 45px 205px;  font-size: 53px;">
         WebHooks
       </h1>
     </a>

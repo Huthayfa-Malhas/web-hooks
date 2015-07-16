@@ -8,12 +8,12 @@ class Subscription extends \Eloquent
         return $this->hasMany('\Webhooks\Models\Url');
     }
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo('\Webhooks\Models\User');
     }
 
-    public function events()
+    public function event()
     {
         return $this->belongsTo ('\Webhooks\Models\Event');
     }

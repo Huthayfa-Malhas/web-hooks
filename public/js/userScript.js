@@ -5,7 +5,7 @@ $(document).ready(function(e) {
     {
         $.ajax({
                 type: 'Delete',
-                url: "/Event/unsubscribe/"+id,
+                url: "/subscriptions/unsubscribe/"+id,
                  success: function(result) {
                     location.reload();
                 }
@@ -41,7 +41,7 @@ $(document).ready(function(e) {
             $(id).attr('contenteditable','false');
             $.ajax({
                 type: 'PUT',
-                url: "/Event/update/"+eventId+"/Urls",
+                url: "/users/"+eventId+"/update",
                 data: {Urls:Url}
             });
         }

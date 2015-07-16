@@ -26,6 +26,7 @@ $(document).ready(function(e) {
   $('#eventDescription').hide()
     $('#eventUrls').hide()
     $('.alert-info').hide()
+
     $(".EventActive").change(function(e){
             var active;
             if (this.checked){
@@ -33,8 +34,9 @@ $(document).ready(function(e) {
             } else {
                 active = 0;
             } 
-            var eventId = $(this).attr('id');
-            $.post("/active", {eventId: eventId, active:active}, function(result){});
+            var subscriptionsId = $(this).attr('id');
+            $.post("/subscriptions/active/"+subscriptionsId, {active:active}, function(result){});
+
     });
     
 

@@ -8,27 +8,24 @@ use Webhooks\Models\User;
 class UsersController extends BaseController 
 {
 
-    public function subscription()
+    public function subscriptions()
     {
         $userId = 1;
-        $subscriptions = User::find(1)->subscriptions;
+        $subscriptions = User::find($userId)->subscriptions;
+        $eventInformation = [];
         foreach ($subscriptions as $subscription) {
-            $event = Event::where('id', $subscription->event_id)->first();
-            $url = Event::find($subscription->event_id)->urls()->where('subscription_id', $subscription->id)->get()->toArray();
-            $urls['id'] = array_fetch($url,'id');
-            $urls['callback_url'] = array_fetch($url,'callback_url');
+            $event = Event::find($subscription->event_id);
+            $url = Event::find($subscription->event_id)->urls;
             $eventInformation[] = [
             "subscriptionsId"       => $subscription->id ,
-            "eventId"               => $subscription->event_id ,
             "active"                => $subscription->active ,
-            "eventName"             => $event['name'],
-            "eventDescription"      => $event['description'],
-            "urls"                  => $urls 
+            "event"                 => $event,
+            "urls"                  => $url
             ];
         }   
-        return View::make("pages.subscription",['eventInformation'=>$eventInformation]);
+        return View::make("pages.subscriptions",['eventInformation'=>$eventInformation]);
     }
-    public function fire()
+    public function simulate()
     {
         $event = Event::all();
         return View::make("pages.test",["Event"=>$event]);

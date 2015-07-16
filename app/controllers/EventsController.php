@@ -1,25 +1,21 @@
 <?php
 
-use Webhooks\Models\Subscription;
 use Webhooks\Models\Event;
 use Webhooks\Models\Url;
 use Webhooks\Models\User;
 
 class EventsController extends BaseController 
 {
-     public function index()
+     public function subscriptions()
     {          
         $userId = 1;
-        $subscriptions = User::find($userId)->subscriptions->toArray();
-        $eventsId = array_fetch($subscriptions,'event_id');
-        $Event = Event::whereNotIn('id', $eventsId)->get();
-        return View::make("pages.subscribe",["Event"=>$Event]);
+        $eventsId = User::find($userId)->subscriptions->lists('event_id');
+        $events = Event::whereNotIn('id', $eventsId)->get()->toArray();
+        return View::make("pages.subscribe",["Event"=>$events]);
     }
 
     public function urls($id)
     {
-        $Event = Event::find($id)->activeurls->toArray();
-        $Urls = array_fetch($Event,'callback_url');
-        return $Urls;
+        return Event::find($id)->activeurls->lists('callback_url');
     }
 }
