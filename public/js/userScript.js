@@ -17,6 +17,7 @@ $(document).ready(function(e) {
         var res = "#tabEvent"+eventId;
         var panel= $(res);
         var inputs = panel.find("input");
+        console.log(inputs);
       
 
         if(value == 'Edit')
@@ -33,19 +34,22 @@ $(document).ready(function(e) {
             inputs.each(function(){
                 var urlBody =$(this).val();
                if(isEmpty(urlBody))
-               $('#TextBoxDiv1').remove() 
+                $(this).remove() 
+                else
+                    $(this).val(urlBody);
                 if(validateURL(urlBody))
                     Url.push(urlBody)
-
                 $(this).attr('readonly', true);
             });
             console.log(Url)
-            /*
+            console.log(eventId)
              $.ajax({
                 type: 'PUT',
                 url: "/Event/update/"+eventId+"/Urls",
-                data: {Urls:Url}
-            });*/
+                data: {Urls:Url},
+                success: function(result) {
+                }
+            });
         }
     });
 

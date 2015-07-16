@@ -18,21 +18,24 @@
       var value = $("#textbox" + $(this).attr('id')).val()
       if(!isEmpty(value)){
         var confirmation = confirm("Are you sure you want to delete this textbox?");
-        if (confirmation == true) {
-          $("#TextBoxDiv"+$(this).attr('id')).remove();
-        } else {
-          return; 
-        }
-      }else {
-        $("#TextBoxDiv"+$(this).attr('id')).remove();
+        if (confirmation == true)
+        {
+          $("#TextBoxDiv" + $(this).attr('id')).remove();
+
+         console.log($(this).attr('id'));
+       } else {
+        return; 
       }
-    }))
+    }else {
+      $("#TextBoxDiv"+$(this).attr('id')).remove();
+    }
+  }))
 
 
 
 
 
-    $('#getUrl').click(function(){
+    $(document).on('click','#getUrl',function(){
       var Url = []
       $(".form-control").each(function() {
         var urlBody = $(this).val();
@@ -45,22 +48,25 @@
       });
       console.log(Url)
     });
+
+
     
-    $.fn.add = function(divId)
-    {
-     
-     var counter = 2
-     var newTextBoxDiv = $(document.createElement('div')).attr({"id":'TextBoxDiv' + counter, "class":"form-group " });
+    $(document).on('click','.addEventUrl', function () {
+      console.log("clicked!");
+      var addButton = $(this);
+      var counter = 2;
+      var newTextBoxDiv = $(document.createElement('div'))
+      .attr("class", 'form-control' + counter);
+      addButton.after(
+        '<input type="text" class="form-control"  name="textbox' + counter + 
+        '" id="textbox" value="" placeholder="Enter url"  /> <br/>' );
 
-     newTextBoxDiv.after().html(
-      '<div class="input-group"><input type="text" class="form-control" placeholder="Enter url" name="textbox' + counter + 
-      '" id="textbox' + counter + '"  >'
-      +'<a class="input-group-addon" id="'+counter+'">x</a></div>');
 
 
-     newTextBoxDiv.appendTo("#"+divId);
-     counter++;
-   });
+
+      counter++;
+
+    });
 
 
 
@@ -99,30 +105,33 @@
         </div>
 
         <div style="width: 535px;">
-          <?php $i=1;?>
-          @foreach ( $event['urls']['callback_url'] as $value)
+         <div class="glyphicon glyphicon-plus addEventUrl" style="cursor:pointer; display:block;" id="addButton"></div>
+         <?php $i=1;?>
+         @foreach ( $event['urls']['callback_url'] as $value)
 
-          <div id='TextBoxesGroup'>
-            <div id="TextBoxDiv1" class="form-group">
-              <div  class="input-group">
-                <input type='text' class="form-control" value ='{{$value}}'  placeholder="Enter url" id='textbox{{$i++}}' readonly >
-                <span class="input-group-addon" id='1' >x</span>
+         <div id='TextBoxesGroup' class=>
+          <div id="TextBoxDiv1" class="form-group">
+            <div  class="input-group">
+              <input type='text' class="form-control" value ='{{$value}}'  placeholder="Enter url" id='textbox{{$i++}}' readonly >
+              <span class="input-group-addon" id='1' >x</span>
 
-              </div>
-              
             </div>
-            @endforeach
 
           </div>
-          <div class="glyphicon glyphicon-plus" style="cursor:pointer" onclick=""></div>
-          
         </div>
-
+        @endforeach
 
       </div>
 
+      <br/>
+
     </div>
+
+
   </div>
-  @endforeach
+
+</div>
+</div>
+@endforeach
 </div>
 @stop
