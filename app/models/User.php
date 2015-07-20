@@ -8,25 +8,24 @@ use \Zizaco\Confide;
 
 class User extends \Eloquent implements \Zizaco\Confide\ConfideUserInterface
 {
-    protected $table = 'users';
     protected $fillable = ["username","email","password","confirmation_code","remember_token","confirmed"];
+    protected $hidden = array('password', 'remember_token');
+
+    public function subscriptions()
+    {
+        return $this->hasMany('\Webhooks\Models\Subscription','user_id');
+    }
 
     public function urls()
     {
-        return $this->belongsToMany('\Webhooks\Models\Url', 'event_user', 'user_id', 'url_id')->withTimestamps();
-    }
-
-    public function events()
+        return $this->hasManyThrough('\Webhooks\Models\Url', '\Webhooks\Models\Subscription');
+    }    
+    
+    public function scopeEvents($query,$type)
     {
-        return $this->belongsToMany('Webhooks\Models\Event', 'event_user', 'user_id', 'event_id')->withTimestamps();
+        $eventsId = \Webhooks\Models\Subscription::where('user_id', '=', $type )->lists('event_id');
+        return \Webhooks\Models\Event::whereIn('id',$eventsId)->get();
     }
-
-   use \Zizaco\Confide\ConfideUser;
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = array('password', 'remember_token');
+    
+    use \Zizaco\Confide\ConfideUser;    
 }
