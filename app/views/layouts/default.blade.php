@@ -21,12 +21,14 @@
     </a>
   </head>
   <body>
-    <ul class="nav nav-tabs">
-      <li id="index" ><a href="/">Home</a></li>
-      <li id="subscription" ><a href="subscription">My Subscriptions</a></li>
-      <li id="subscriptions" ><a href="subscriptions">Subscribe Event</a></li>
-      <li id="webhooks" ><a href="webhooks">Test Web-Hooks</a></li>
-    </ul>
+    <center>
+      <ul class="nav nav-tabs">
+        <li id="index" ><a href="/">Home</a></li>
+        <li id="subscription" ><a href="/subscription">My Subscriptions</a></li>
+        <li id="subscriptions" ><a href="/subscriptions">Subscribe Event</a></li>
+        <li id="events" ><a href="/events">Test Web-Hooks</a></li>
+      </ul>
+    </center>
     @yield('content')
   </div>
   </body>

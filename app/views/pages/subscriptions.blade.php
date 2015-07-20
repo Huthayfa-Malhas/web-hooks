@@ -1,8 +1,8 @@
  @extends('layouts.default')
  @section('content')
- <h3>My Subscriptions</h3>
+ <center><h3>My Subscriptions</h3></center>
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                  @foreach ( $eventInformation as $event)
+                  @foreach ( $subscriptionsInf as $event)
                       <div class="panel panel-default">
                         <div style=" position: relative;float: right;margin-top: 4px;margin-right: 4px; ">
                                 @if ($event['active'] == 1 ) 

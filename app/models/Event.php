@@ -13,7 +13,7 @@ class Event extends \Eloquent
         return $this->hasManyThrough('\Webhooks\Models\Url', '\Webhooks\Models\Subscription');
     }
 
-    public function activeurls()
+    public function activeUrls()
     {
         return $this->urls()->where('active',1);
     }

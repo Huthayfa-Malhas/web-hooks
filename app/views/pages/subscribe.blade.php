@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
-    <h3>Subscribe Event</h3>
+    <center><h3>Subscribe Event</h3></center>
             <form>
                 <div id="eventError" class="form-group">
                     <select class="form-control" id="eventSelected">
