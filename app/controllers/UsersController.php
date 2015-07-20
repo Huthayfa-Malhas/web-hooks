@@ -1,8 +1,6 @@
 <?php
 
-use Webhooks\Models\Subscription;
 use Webhooks\Models\Event;
-use Webhooks\Models\Url;
 use Webhooks\Models\User;
 
 class UsersController extends BaseController 
@@ -12,23 +10,16 @@ class UsersController extends BaseController
     {
         $userId = 1;
         $subscriptions = User::find($userId)->subscriptions;
-        $eventInformation = [];
+        $subscriptionsInf = [];
         foreach ($subscriptions as $subscription) {
-            $event = Event::find($subscription->event_id);
-            $url = Event::find($subscription->event_id)->urls;
-            $eventInformation[] = [
+            $subscriptionsInf[] = [
             "subscriptionsId"       => $subscription->id ,
             "active"                => $subscription->active ,
-            "event"                 => $event,
-            "urls"                  => $url
+            "event"                 => Event::find($subscription->event_id),
+            "urls"                  => Event::find($subscription->event_id)->urls
             ];
         }   
-        return View::make("pages.subscriptions",['eventInformation'=>$eventInformation]);
-    }
-    public function simulate()
-    {
-        $event = Event::all();
-        return View::make("pages.test",["Event"=>$event]);
+        return View::make("pages.subscriptions",['subscriptionsInf'=>$subscriptionsInf]);
     }
 
 }

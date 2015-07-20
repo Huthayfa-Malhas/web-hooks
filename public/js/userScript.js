@@ -41,7 +41,7 @@ $(document).ready(function(e) {
             $(id).attr('contenteditable','false');
             $.ajax({
                 type: 'PUT',
-                url: "/users/"+eventId+"/update",
+                url: "/subscriptions/"+eventId,
                 data: {Urls:Url}
             });
         }

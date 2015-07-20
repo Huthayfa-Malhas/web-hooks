@@ -14,8 +14,21 @@ class EventsController extends BaseController
         return View::make("pages.subscribe",["Event"=>$events]);
     }
 
-    public function urls($id)
+    public function index()
     {
-        return Event::find($id)->activeurls->lists('callback_url');
+        $events = Event::all();
+        $eventUrls = [];
+        foreach ($events as $key) {
+            $urls = Event::find($key->id)->activeurls->lists('callback_url');
+            if(sizeof($urls) != 0 ) {
+                $eventUrls[] =[
+                    "eventid" => $key->id,
+                    "urls" => $urls
+                ];
+            }
+
+        }
+        return View::make("pages.simulat",["events"=>$events,"eventUrls"=>$eventUrls]);
     }
+
 }

@@ -12,27 +12,21 @@
 
 Route::get('/',function()
 {
-	//return Webhooks\Models\User::events(1);
-	return View::make('pages.index');
+    return View::make('pages.index');
 });
 
 /**********      SubscriptionsController      **********/
 Route::group(['prefix'=>'subscriptions'], function()
 {
-	Route::post('subscribe','SubscriptionsController@subscribe');
-	Route::post('active/{id}','SubscriptionsController@activate');
-	Route::delete('unsubscribe/{id}','SubscriptionsController@unsubscribe');
+    Route::post('subscribe','SubscriptionsController@subscribe');
+    Route::post('active/{id}','SubscriptionsController@activate');
+    Route::delete('unsubscribe/{id}','SubscriptionsController@unsubscribe');
+    Route::put('/{id}','SubscriptionsController@update');
 });
 
-Route::put('users/{id}/update','SubscriptionsController@update');
-
 /**********      UsersController      **********/
-Route::get('webhooks','UsersController@simulate');
 Route::get('subscription','UsersController@subscriptions');
 
 /**********      EventsController      **********/
-Route::get('Event/{id}/Urls','EventsController@urls');
+Route::get('events','EventsController@index');
 Route::get('subscriptions','EventsController@subscriptions');
-
-
-

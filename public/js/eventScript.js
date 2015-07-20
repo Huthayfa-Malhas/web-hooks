@@ -2,17 +2,8 @@ $(document).ready(function(e) {
 
 	$('#selectFire').change(function(){
         var eventId = $( "#selectFire option:selected" ).val();
-        $.get("/Event/" + eventId + "/Urls", null, function(result){
-            if(result == ''){
-                $('#eventUrls').hide()
-            }else{
-                for (var i = result.length - 1; i >= 0; i--) {
-                    result[i] = result[i] +'<br>' 
-                };
-                $('#eventUrls').html(result);
-                $('#eventUrls').show()
-            }
-         });
+        $('.urls').hide()
+        $('#Urls'+eventId).show()
     });
 
     $("#fireEvent").click(function(){
