@@ -8,16 +8,16 @@ class WebhooksFire
     public function subscribe()
     {
 
-            Event::listen('prefix.*', function($events, $payload) {
+            Event::listen('Yamsafer.*', function($events, $payload) {
             
-                if (Event::firing() == 'prefix.'.$events['name'])
+                if (Event::firing() == 'Yamsafer.'.$events['name'])
                  {
-                    $callback_url = Webhooks\Models\Event::find($events['id'])->activeurls;
+                    $callbackurl = Webhooks\Models\Event::find($events['id'])->activeurls;
 
-                    foreach ($callback_url as $value) 
+                    foreach ($callbackurl as $url) 
                     {
-                        $sent=array($payload,$value['callback_url']);
-                        Queue::push('QeueHandler@posthooks',$sent);
+                        $sent=array($payload,$url['callback_url']);
+                        Queue::push('HookJobs@posthooks',$sent);
                     }
                 }
                 

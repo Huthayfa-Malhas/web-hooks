@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Event;
 |
 */
 
-Route::get('handleevent/{eventname}/{payload}',['uses'=>'FireEvents@webhookfire'] );
+Route::get('handleevent/{eventname}/{payload}',['uses'=>'YamsaferEvents@webhookfire'] );
 
 
 /**********      SubscriptionsController      **********/
