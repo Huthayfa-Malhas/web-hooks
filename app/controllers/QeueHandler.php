@@ -1,14 +1,12 @@
 <?php
 use Illuminate\Support\Facades\Event;
-use Webhooks\Models\Subscription;
-use Webhooks\Models\Url;
-use Webhooks\Models\User;
 use Vinelab\Http\Client as HttpClient;
 
 class QeueHandler 
 {
 
 	public function posthooks($job,$data)
+
   {
     $client = new HttpClient;
     $request = [
@@ -16,6 +14,7 @@ class QeueHandler
         'params' => $data['payload'],
         'jason' => true
     ];
+
 
     $response = $client->post($request);
     $job->delete();

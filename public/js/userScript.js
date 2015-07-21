@@ -14,16 +14,28 @@ $(document).ready(function(e) {
     $("#noInformation").show()
     $('.btn-success').click(function(){
         var value = $(this).text();
+<<<<<<< HEAD
         var subscriptionsId = $(this).attr('id');
         var id = "#divtotext"+ subscriptionsId;
+=======
+        var eventId = $(this).attr('id');
+        var res = "#tabEvent"+eventId;
+        var panel= $(res);
+        var inputs = panel.find("input");
+        console.log(inputs);
+      
+>>>>>>> 9ec1550cee89810d355d28334cc2ae83b9a9b602
 
         if(value == 'Edit')
         {
             $(this).text('Save');
-            $(id).css({"border":"1px solid #ccc","border-radius":"5px"});
-            document.getElementById(id).readOnly=false;
-            $(id).focus();
+            inputs.each(function(){
+            $(this).attr('readonly', false);
+;
+        });  
+
         } else {
+<<<<<<< HEAD
             var test = $(id).html();
             var Url = [];
             var errorUrl = [];
@@ -56,6 +68,29 @@ $(document).ready(function(e) {
                 $('.alert-danger').html('Error in URl : <br>' + newHTML.join(""))
                 $('.alert-danger').show()
             }
+=======
+            $(this).text('Edit');
+            Url = []
+            inputs.each(function(){
+                var urlBody =$(this).val();
+               if(isEmpty(urlBody))
+                $(this).remove() 
+                else
+                    $(this).val(urlBody);
+                if(validateURL(urlBody))
+                    Url.push(urlBody)
+                $(this).attr('readonly', true);
+            });
+            console.log(Url)
+            console.log(eventId)
+             $.ajax({
+                type: 'PUT',
+                url: "/Event/update/"+eventId+"/Urls",
+                data: {Urls:Url},
+                success: function(result) {
+                }
+            });
+>>>>>>> 9ec1550cee89810d355d28334cc2ae83b9a9b602
         }
     });
 

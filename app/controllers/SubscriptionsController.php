@@ -37,10 +37,10 @@ class SubscriptionsController extends \BaseController
         $subscrip = Subscription::where('event_id', $id)->where('user_id', $userId)->get();
         $subscriptionId = $subscrip[0]->id;
         $urlObject = Url::where('subscription_id',$subscriptionId )->get();
+
         foreach ($urlObject as $value) {
             array_push($eventUrl, $value['callback_url']);
         }
-
         $resettedArrayDelete = array_values(array_diff($eventUrl, $recivedUrls));
         $resettedArraySave = array_values(array_diff($recivedUrls, $eventUrl));
         foreach ($resettedArrayDelete as $value) {
@@ -50,6 +50,7 @@ class SubscriptionsController extends \BaseController
         foreach ( $resettedArraySave as $value) {
             if (preg_match("/\b(?:(?:https?|ftp):\/\/)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$value)) 
                 $Url = Url::create(["callback_url" => $value,"subscription_id" => $id]);
+
         }
         return 'success';
     }

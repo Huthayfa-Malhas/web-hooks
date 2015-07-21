@@ -15,11 +15,14 @@ use Illuminate\Support\Facades\Event;
 Route::post('handleevent/{eventname}/{payload}',['uses'=>'FireEvents@webhookfire'] );
 
 
+<<<<<<< HEAD
 Route::get('/',function()
 {
 	  return View::make('pages.index');
 });
 
+=======
+>>>>>>> 9ec1550cee89810d355d28334cc2ae83b9a9b602
 /**********      SubscriptionsController      **********/
 Route::post('subscribe','SubscriptionsController@subscribe');
 Route::post('active/{id}','SubscriptionsController@activate');
